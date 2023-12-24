@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>着物加工自動計算システム</title>
-<link rel="stylesheet" href="bubunnaoshi.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>着物加工自動計算システム</title>
+    <link rel="stylesheet" href="bubunnaoshi.css">
 </head>
 <body>
 
 <div class="calc-container">
-  <h1>着物加工自動計算システム</h1>
-  <div class="form-kimono">
-    <label for="kimonoType">着物の種類:</label>
-    <select id="kimonoType">
-      <option value="">選択してください</option>
-      <option value="kimono">着物</option>
-      <option value="juban">襦袢</option>
-      <option value="tomesode">留袖</option>
-    </select>
-    <label class="form-kakou">加工の種類</label>
-    <div id="modificationsContainer" class="modifications-container"></div>
+    <h1>着物加工自動計算システム</h1>
+    <div class="form-kimono">
+        <label for="kimonoType">着物の種類:</label>
+        <select id="kimonoType">
+            <option value="">選択してください</option>
+            <option value="kimono">着物</option>
+            <option value="juban">襦袢</option>
+            <option value="tomesode">留袖</option>
+        </select>
+        
+        <!-- 加工の種類選択肢を動的に追加するコンテナ -->
+        <div id="modificationsContainer"></div>
+    </div>
 
-    <!-- 付属品選択肢を追加 -->
     <div class="form-accessories">
-      <label for="accessoriesType">付属品の種類:</label>
-      <select id="accessoriesType">
-          <option value="">選択してください</option>
-          <option value="fan" data-price="1200">付属品1</option>
-          <option value="obi" data-price="2400">付属品2</option>
-          <option value="obiage" data-price="3600">付属品3</option>
-      </select>
-  </div>
-  
+        <label for="accessoriesType">付属品の種類:</label>
+        <select id="accessoriesType">
+            <option value="">選択してください</option>
+            <option value="fan" data-price="1200">扇子</option>
+            <option value="obi" data-price="2400">帯</option>
+            <option value="obiage" data-price="3600">帯揚げ</option>
+        </select>
+    </div>
+    
+    <div class="form-custom-price">
+        <label for="customPrice">その他加工賃:</label>
+        <input type="number" id="customPrice" placeholder="金額を入力">
+    </div>
 
-      <!-- オープン価格の入力フィールドを追加 -->
-      <label for="customPrice">その他加工賃:</label>
-      <input type="number" id="customPrice" placeholder="金額を入力">
-      
-  </div>
-  <!-- 内訳表示エリア -->
-  <div class="summary" id="summary">
-    <div id="selectedKimonoType"></div>
-    <ul id="details"></ul>
-  </div>
-  
-  <!-- 合計価格 -->
-  <div id="totalPrice">
-    <h2>合計価格: <span id="totalValue">¥0</span>〜</h2>
-  </div>
-
-  <!-- お客様情報 -->
-  <div class="customer-info">
-    <h2>お客様情報</h2>
-    <label for="customerName">名前:</label>
-    <input type="text" id="customerName">
-
-    <label for="customerKana">フリガナ:</label>
-    <input type="text" id="customerKana">
-
-    <label for="customerPhone">電話番号:</label>
-    <input type="tel" id="customerPhone">
-
-    <label for="customerMail">メールアドレス:</label>
-    <input type="email" id="customerMail">
-
-    <label for="customerPostalcode">郵便番号:</label>
-    <input type="text" id="customerPostalcode">
-
-    <label for="customerAddress">住所:</label>
-    <input type="text" id="customerAddress">
-  </div>
-
-  <button class="btn-csv" id="downloadCSV">計算結果をCSVでダウンロード</button>
-  <button class="btn-print" id="printPage">画面を印刷する</button>
+    <!-- 内訳表示エリア -->
+    <div class="summary" id="summary">
+        <h2>内訳</h2>
+        <ul id="details"></ul>
+    </div>
+    
+    <!-- 合計価格 -->
+    <div class="total-price">
+        <h2>合計価格: <span id="totalValue">¥0</span></h2>
+    </div>
+    
+    <!-- お客様情報の入力フォーム -->
+    <div class="customer-info">
+        <h2>お客様情報</h2>
+        <label for="customerName">名前:</label>
+        <input type="text" id="customerName">
+        
+        <label for="customerKana">フリガナ:</label>
+        <input type="text" id="customerKana">
+        
+        <label for="customerPhone">電話番号:</label>
+        <input type="tel" id="customerPhone">
+        
+        <label for="customerMail">メールアドレス:</label>
+        <input type="email" id="customerMail">
+        
+        <label for="customerPostalcode">郵便番号:</label>
+        <input type="text" id="customerPostalcode">
+        
+        <label for="customerAddress">住所:</label>
+        <input type="text" id="customerAddress">
+    </div>
+    
+    <button class="btn-csv" id="downloadCSV">計算結果をCSVでダウンロード</button>
+    <button class="btn-print" id="printPage">画面を印刷する</button>
 </div>
 
 <script src="bubunnaoshi.js"></script>

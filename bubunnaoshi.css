@@ -135,3 +135,11 @@ button {
     color: #fff;
     border: none;
 }
+
+
+/* 追加の削除ボタンスタイル */
+button.remove-btn {
+  color: #ff0000;
+  margin-left: 10px;
+  cursor: pointer;
+}
