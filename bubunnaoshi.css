@@ -1,0 +1,137 @@
+:root {
+    --vs:20px; /* vertical space */
+    --hs:20px; /* horizontal space */
+}
+
+body, button, input, select {
+    font-family: 'Noto Sans JP', Arial, sans-serif;
+  font-size: 18px;
+  }
+
+select {
+    padding: 13px 10px;
+    
+}
+
+button {
+    background-color: #fa9280;
+    color: #fff;
+    border: none;
+}
+
+  
+  .calc-container {
+    width: 90%;
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 30px 50px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .calc-container h1, .calc-container h2 {
+    text-align: center;
+    letter-spacing: 0.1rem;
+    color: #666;
+  }
+  
+/*着物入力フォーム*/
+.form-kimono {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+
+/*加工入力フォーム*/
+.form-kakou {
+    margin-top: var(--vs);
+}
+
+/*内訳表示*/
+.summary {
+    margin-top: calc( var(--vs)*2);
+    padding: var(--vs) var(--hs);
+    background-color: #ffeeeb;
+}
+  
+  .modifications-container select {
+    display: block;
+  }
+  
+/*合計金額表示*/
+
+  #totalPrice {
+    margin-top: calc(var(--vs) *2) ;
+}
+
+  .customer-info {
+    margin-top: 20px;
+  }
+  
+  .customer-info h2, .customer-info label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .customer-info input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  @media print {
+    button, select, label {
+      display: none;
+    }
+    .form-kimono {
+      display: none;
+    }
+  
+    #selectedKimonoType {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  
+    #summary, #totalPrice {
+      page-break-inside: avoid;
+      margin-top: 20px;
+    }
+  
+    #details ul {
+      padding-left: 0;
+    }
+  
+    #details li {
+      list-style-type: none;
+    }
+  }
+
+/* 出力 */
+.btn-csv {
+    background-color: #6dc2cd;
+    color: #fff;
+    border: none;
+}
+
+.btn-print {
+    background-color: #fa9280;
+    color: #fff;
+    border: none;
+}
