@@ -1,0 +1,16 @@
+@media print {
+    body * {
+      visibility: hidden;  /* 全ての要素を非表示にする */
+    }
+    #estimate, #estimate * {
+      visibility: visible;  /* 見積もりとその子要素を表示 */
+    }
+    #customer-info, #customer-info * {
+      visibility: visible;  /* お客様情報とその子要素を表示 */
+    }
+    #estimate, #customer-info {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
