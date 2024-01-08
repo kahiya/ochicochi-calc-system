@@ -1,117 +1,153 @@
-let items = [
-    { name: "留袖・色留袖(比翼付き)", domestic: 62700, overseas: 34100 },
-    { name: "留袖（訪問着仕立）", domestic: 55000, overseas: 27500 },
-    // その他の種類...
-    { name: "男袴（馬乗・行燈）", domestic: 46200, overseas: null }
+// 商品クラス
+class Item {
+    constructor(name, domestic, overseas) {
+      this.name = name;
+      this.domestic = domestic;
+      this.overseas = overseas;
+    }
+  }
+  
+  // 前処理クラス
+  class Preprocessing {
+    constructor(name, price) {
+      this.name = name;
+      this.price = price;
+    }
+  }
+  
+  // 付属品クラス
+  class Accessory {
+    constructor(name, price) {
+      this.name = name;
+      this.price = price;
+    }
+  }
+  
+  // 商品データの初期化
+  const items = [
+    new Item("留袖・色留袖(比翼付き)", 62700, 34100),
+    new Item("留袖（訪問着仕立）", 55000, 27500),
+    // その他の商品データ...
   ];
   
-  let preprocessing = [
-    { name: "湯のし（三丈もの）", price: 1100 },
-    { name: "湯のし（四丈もの）", price: 1320 },
-    { name: "手湯のし（絞り）", price: 1650 },
-    { name: "仮絵羽", price: 2750 }
+  // 前処理データの初期化
+  const preprocessingOptions = [
+    new Preprocessing("湯のし（三丈もの）", 1100),
+    new Preprocessing("湯のし（四丈もの）", 1320),
+    // その他の前処理データ...
   ];
   
-  let accessories = [
-    { name: "八掛・精華", price: 9900 },
-    { name: "八掛・駒", price: 9900 },
-    // その他の付属品...
-    { name: "台衿（衿芯）", price: 660 }
+ // 付属品データ
+const accessories = [
+    { name: '八掛（精華）', price: 9900 },
+    { name: '八掛（駒）', price: 9900 },
+    { name: '胴裏（正絹）', price: 9900 },
+    { name: '振袖胴裏', price: 14300 },
+    { name: '片裏', price: 12100 },
+    { name: '背伏（正絹）', price: 770 },
+    { name: '背伏（ポリ）', price: 660 },
+    { name: '衣紋抜き', price: 990 },
+    { name: '居敷当（着物）', price: 2750 },
+    { name: '居敷当（襦袢）', price: 2420 },
+    { name: '衿裏（正絹）', price: 2200 },
+    { name: '絽衿裏（正絹）', price: 2750 },
+    { name: '衿裏（ポリ）', price: 550 },
+    { name: '絽衿裏（ポリ）', price: 1100 },
+    { name: '台衿（衿芯）', price: 660 }
   ];
   
-  window.onload = function () {
-    let itemSelect = document.getElementById("item");
-    let originSelect = document.getElementById("origin");
-    let preprocessingSelect = document.getElementById("preprocessing");
-    let accessoriesSelect = document.getElementById("accessories");
-    let estimateDiv = document.getElementById("estimate");
+
+// 各種選択肢をセットアップする関数
+function populateSelectWithOptions(selectElement, options, textProperty = 'name') {
+    selectElement.innerHTML = '';
+    options.forEach((option, index) => {
+      const opt = document.createElement("option");
+      opt.value = index;
+      opt.textContent = option[textProperty];
+      selectElement.appendChild(opt);
+    });
+  }
+
+
   
-    // Add options to select
-    for (let i = 0; i < items.length; i++) {
-      let opt = document.createElement("option");
-      opt.value = i;
-      opt.innerHTML = items[i].name;
-      itemSelect.appendChild(opt);
+  // 付属品の合計コストを計算する関数
+  function calculateAccessoriesTotal() {
+    const accessoriesSelects = document.querySelectorAll('.select-accessory');
+    return Array.from(accessoriesSelects).reduce((total, select) => {
+      const accessory = accessories[select.value];
+      return total + (accessory ? accessory.price : 0);
+    }, 0);
+  }
+  
+  // 見積もり結果をHTMLとして作成する関数
+  function createEstimateHTML(item, preprocessing, origin, accessoriesTotal) {
+    return `
+      ${item.name} (${origin}): ¥${item[origin]}<br>
+      ${preprocessing.name}: ¥${preprocessing.price}<br>
+      付属品合計: ¥${accessoriesTotal}<br>
+      合計: ¥${item[origin] + preprocessing.price + accessoriesTotal}
+    `;
+  }
+  
+  // 選択されたオプションに基づいて見積もりを計算し表示する関数
+  function calculateEstimate() {
+    const itemSelect = document.getElementById("item");
+    const originSelect = document.getElementById("origin");
+    const preprocessingSelect = document.getElementById("preprocessing");
+    const estimateDiv = document.getElementById("estimate");
+  
+    const selectedItem = items[itemSelect.value];
+    const selectedPreprocessing = preprocessingOptions[preprocessingSelect.value];
+    const selectedOrigin = originSelect.value;
+    const accessoriesTotal = calculateAccessoriesTotal();
+  
+    let cost = selectedItem[selectedOrigin];
+    if (cost != null) {
+      cost += selectedPreprocessing.price + accessoriesTotal;
     }
   
-    for (let i = 0; i < preprocessing.length; i++) {
-      let opt = document.createElement("option");
-      opt.value = i;
-      opt.innerHTML = preprocessing[i].name;
-      preprocessingSelect.appendChild(opt);
-    }
+    estimateDiv.innerHTML = cost != null ? createEstimateHTML(selectedItem, selectedPreprocessing, selectedOrigin, accessoriesTotal) : "選択した商品は選択した地域での仕立てが可能ではありません";
+  }
   
-    for (let i = 0; i < accessories.length; i++) {
-      let opt = document.createElement("option");
-      opt.value = i;
-      opt.innerHTML = accessories[i].name;
-      accessoriesSelect.appendChild(opt);
-    }
+// 付属品のセレクトボックスを追加する関数
+function addAccessoryOption() {
+    const accessoryContainer = document.getElementById('accessory-container');
+    const accessorySelect = document.createElement('select');
+    accessorySelect.classList.add('select-accessory');
+    accessoryContainer.appendChild(accessorySelect);
   
-    // Function to calculate and display estimate
-    let calculateEstimate = function () {
-      let selected_item = items[itemSelect.value];
-      let origin = originSelect.value;
-      let preproc = preprocessing[preprocessingSelect.value];
-      let accessory = accessories[accessoriesSelect.value];
+    const removeButton = document.createElement('button');
+    removeButton.textContent = '削除';
+    removeButton.type = 'button';
+    removeButton.addEventListener('click', function() {
+      accessorySelect.remove();
+      removeButton.remove();
+      calculateEstimate();
+    });
   
-      let cost = selected_item[origin];
-  
-      // Display costs
-      if (cost !== null) {
-        let estimateHTML = `
-          ${selected_item.name} (${origin}): ¥${cost}<br/>
-          ${preproc.name}: ¥${preproc.price}<br/>
-          ${accessory.name}: ¥${accessory.price}<br/>
-          合計: ¥${cost + preproc.price + accessory.price}
-        `;
-        estimateDiv.innerHTML = estimateHTML;
-  
-        downloadCSVButton.dataset.csv = `
-          "商品名","金額"\n
-          "${selected_item.name} (${origin})","¥${cost}"\n
-          "${preproc.name}","¥${preproc.price}"\n
-          "${accessory.name}","¥${accessory.price}"\n
-          "合計","¥${cost + preproc.price + accessory.price}"
-        `;
-      } else {
-        estimateDiv.innerHTML = "選択した商品は選択した地域での仕立てが可能ではありません";
-      }
-    };
-  
-    // Register the function to onchange handlers
-    itemSelect.onchange = calculateEstimate;
-    originSelect.onchange = calculateEstimate;
-    preprocessingSelect.onchange = calculateEstimate;
-    accessoriesSelect.onchange = calculateEstimate;
-  
-    let downloadCSVButton = document.getElementById('download-csv');
-    downloadCSVButton.onclick = function (e) {
-      let csv = this.dataset.csv;
-      let blob = new Blob([csv], {type: 'text/csv'});
+    accessorySelect.addEventListener('change', calculateEstimate);
+    populateSelectWithOptions(accessorySelect, accessories);
     
-      // Internet Explorer
-      if (window.navigator.msSaveOrOpenBlob) {
-        window.navigator.msSaveOrOpenBlob(blob, "見積もり.csv");
-      } else { // Other Browsers
-        let link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = "見積もり.csv";
-        link.style.display = 'none';
-    
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
-    
-      // Stop the original click event
-      e.preventDefault();
-    };
-    let printButton = document.getElementById('print');
-    printButton.onclick = function () {
-      window.print();
-    };
+    accessoryContainer.appendChild(removeButton);
+  }
   
-    // Calculate initial estimate
+  // ページ読み込み時の初期設定関数
+  window.onload = function() {
+    // 商品と前処理オプションのセットアップ
+    populateSelectWithOptions(document.getElementById("item"), items);
+    populateSelectWithOptions(document.getElementById("preprocessing"), preprocessingOptions);
+  
+    // 初回の付属品セレクトボックスのセットアップ
+    addAccessoryOption();
+  
+    // 「付属品を追加」ボタンのイベントリスナー設定
+    document.getElementById('add-accessory').addEventListener('click', addAccessoryOption);
+  
+    // 商品と前処理のセレクトボックスのイベントリスナー設定
+    document.getElementById("item").addEventListener('change', calculateEstimate);
+    document.getElementById("origin").addEventListener('change', calculateEstimate);
+    document.getElementById("preprocessing").addEventListener('change', calculateEstimate);
+  
+    // 初期見積もり計算
     calculateEstimate();
   };

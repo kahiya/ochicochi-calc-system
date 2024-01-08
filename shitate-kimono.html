@@ -4,61 +4,78 @@
     <meta charset="UTF-8" />
     <title>自動見積りシステム</title>
     <link rel="stylesheet" href="shitate-kimono.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <form id="estimate-form">
-      <label for="item">着物の種類：</label>
-      <select id="item"></select>
-      <br/>
+    <div class="main-wrap">
+      <h1 class="title">御仕立て見積</h1>
+      <form id="estimate-form">
 
-      <label for="origin">仕立て地：</label>
-      <select id="origin">
-        <option value="domestic">国内手縫い</option>
-        <option value="overseas">海外手縫い</option>
-      </select>
-      <br/>
+        <div class="form-field">
+          <label for="item" class="form-label">着物の種類：</label>
+          <select id="item" class="form-select"></select>
+        </div>
+        <div class="form-field">
+          <label for="origin" class="form-label">仕立て地：</label>
+          <select id="origin" class="form-select">
+            <option value="domestic">国内手縫い</option>
+            <option value="overseas">海外手縫い</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <!-- 既存のHTMLの中に、以下のコンテナとボタンを追加 -->
+          <div class="form-field" id="preprocessing-container">
+            <!-- JavaScriptで初期の前処理セレクトボックスがここに追加される -->
+          </div>
+          <button type="button" id="add-preprocessing">前処理を追加</button>
 
-      <label for="preprocessing">前処理：</label>
-      <select id="preprocessing"></select> <!-- 新しく追加 -->
-      <br/>
+          <!-- 付属品を追加するコンテナ -->
+          <div class="form-field" id="accessory-container">
+            <label class="form-label">付属品：</label>
+            <!-- JavaScriptによって初期の付属品セレクトボックスがここに作成されます -->
+          </div>
+          <button type="button" id="add-accessory">付属品を追加</button>
+        </div>
 
-      <label for="accessories">付属品：</label>
-      <select id="accessories"></select>
-      <br/>
-
-      <div>見積もり：</div>
-      <div id="estimate"></div>
-
-
+        <div id="estimate"></div>
       <h3>お客様の情報</h3>
-      <label for="name">名前：</label>
-      <input type="text" id="name" name="name" required>
-      <br/>
-    
-      <label for="furigana">フリガナ：</label>
-      <input type="text" id="furigana" name="furigana" required>
-      <br/>
-    
-      <label for="phone">電話番号：</label>
-      <input type="tel" id="phone" name="phone" required>
-      <br/>
-    
-      <label for="email">メールアドレス：</label>
-      <input type="email" id="email" name="email" required>
-      <br/>
-    
-      <label for="postal-code">郵便番号：</label>
-      <input type="text" id="postal-code" name="postal-code" required>
-      <br/>
-    
-      <label for="address">住所：</label>
-      <input type="text" id="address" name="address" required>
-      <br/>
+      <div class="form-field">
+        <label for="name" class="form-label">名前：</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-field">
+        <label for="furigana" class="form-label">フリガナ：</label>
+        <input type="text" id="furigana" name="furigana" required>
+      </div>
+
+      <div class="form-field">
+        <label for="phone" class="form-label">電話番号：</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+
+      <div class="form-field">
+        <label for="email" class="form-label">メールアドレス：</label>
+        <input type="email" id="email" name="email" >
+      </div>
+
+      <div class="form-field">
+        <label for="postal-code" class="form-label">郵便番号：</label>
+        <input type="text" id="postal-code" name="postal-code" required>
+      </div>
+
+      <div class="form-field">
+        <label for="address" class="form-label">住所：</label>
+        <input type="text" id="address" name="address" required>
+      </div>
+  
+      <button id="download-csv">CSVダウンロード</button>
+      <button id="print">印刷</button>
     </form>
 
-    <button id="download-csv">CSVダウンロード</button>
-    <button id="print">印刷</button>
-
+  </div>
     <script src="shitate-kimono.js"></script>
   </body>
 </html>
