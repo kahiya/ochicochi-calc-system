@@ -24,18 +24,17 @@
             <option value="overseas">海外手縫い</option>
           </select>
         </div>
-        <div class="form-field">
-          <!-- 既存のHTMLの中に、以下のコンテナとボタンを追加 -->
-          <div class="form-field" id="preprocessing-container">
-            <!-- JavaScriptで初期の前処理セレクトボックスがここに追加される -->
-          </div>
-          <button type="button" id="add-preprocessing">前処理を追加</button>
 
-          <!-- 付属品を追加するコンテナ -->
-          <div class="form-field" id="accessory-container">
-            <label class="form-label">付属品：</label>
-            <!-- JavaScriptによって初期の付属品セレクトボックスがここに作成されます -->
-          </div>
+        <div class="form-field" id="preprocessing-container">
+          <label for="preprocessing" class="form-label">前処理：</label>
+          <select id="preprocessing" class="form-select"></select>
+          <button type="button" id="add-preprocessing">前処理を追加</button>
+        </div>
+  
+      <!-- 付属品を追加するコンテナとボタン -->
+        <div class="form-field" id="accessory-container">
+          <label class="form-label">付属品：</label>
+          <!-- JavaScriptによって初期の付属品セレクトボックスがここに作成されます -->
           <button type="button" id="add-accessory">付属品を追加</button>
         </div>
 
@@ -76,6 +75,6 @@
     </form>
 
   </div>
-    <script src="shitate-kimono.js"></script>
+  <script src="shitate-kimono.js"></script>
   </body>
 </html>
