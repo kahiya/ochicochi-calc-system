@@ -1,4 +1,3 @@
-console.log('読み込みを開始します…');
 
 // 商品クラス
 class Item {
@@ -79,10 +78,16 @@ function calculateAccessoriesTotal() {
 
 // 見積もり結果をHTMLとして作成する関数
 function createEstimateHTML(item, preprocessingPrices, origin, accessoriesTotal) {
+    // origin を日本語で表示するためにマップします。
+    const originJapanese = {
+      'domestic': '国内',
+      'overseas': '国外'
+    };
+  
     // preprocessingPrices は前処理の価格の合計値です
     const preprocessingCostString = preprocessingPrices.map(pp => `前処理: ¥${pp}`).join(' + ');
     return `
-      ${item.name} (${origin}): ¥${item[origin]}<br>
+      ${item.name} (${originJapanese[origin]}): ¥${item[origin]}<br>
       ${preprocessingCostString}<br>
       付属品合計: ¥${accessoriesTotal}<br>
       合計: ¥${item[origin] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal}
