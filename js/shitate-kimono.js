@@ -105,7 +105,7 @@ function createEstimateHTML(item, preprocessingPrices, origin, accessoriesTotal)
       ${item.name} (${originJapanese[origin]}): ¥${item[origin]}<br>
       ${preprocessingCostString}<br>
       付属品合計: ¥${accessoriesTotal}<br>
-      合計: ¥${item[origin] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal}
+      合計: ¥${item[origin] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal}〜
     `;
   }
   
@@ -226,6 +226,8 @@ document.getElementById('download-csv').addEventListener('click', function() {
 //---------------------------------------------------
 //印刷
 //---------------------------------------------------
+document.getElementById('printed-date').textContent = new Date().toLocaleDateString('ja-JP');
+
 document.getElementById('print').addEventListener('click', function() {
     window.print(); // ブラウザの印刷ダイアログを開く
   });

@@ -38,8 +38,12 @@
           <!-- JavaScriptによって初期の付属品セレクトボックスがここに作成されます -->
           <button type="button" id="add-accessory">付属品を追加</button>
         </div>
-
-        <div id="estimate"></div>
+        <div id="estimate-result" class="estimate-result">
+          <p class="result-header">見積もり結果</p>
+          <div id="estimate" class="estimate">
+          </div>
+          <p class="exempt">※このお見積もりは現時点での情報を基に作成しており、最終契約内容により変動する場合があります。</p>
+        </div>
       <h3>お客様の情報</h3>
       <div class="form-field">
         <label for="name" class="form-label">名前：</label>
@@ -70,10 +74,17 @@
         <label for="address" class="form-label">住所：</label>
         <input type="text" id="address" name="address" class="customer-input" required>
       </div>
-  
+
       <button id="download-csv">CSVダウンロード</button>
       <button id="print">印刷</button>
     </form>
+    <div id="company-info" class="company-info">
+      <p class="date-printed">発行日：<span id="printed-date"></span></p>
+      <img src="" class="company-logo" /><span>ここにロゴが入る</span> <!-- ロゴのパスは適宜変更してください -->
+      <p class="company-address">住所：〒600-8054 京都府京都市下京区仏光寺東町１１２−１</p>
+      <p class="company-tel">電話番号：075-344-4566</p>
+      <!-- ... その他のフォーム要素 ... -->
+    </div>
 
   </div>
   <script src="js/shitate-kimono.js"></script>
