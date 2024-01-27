@@ -93,21 +93,24 @@ function calculateAccessoriesTotal() {
 
 // 見積もり結果をHTMLとして作成する関数
 function createEstimateHTML(item, preprocessingPrices, origin, accessoriesTotal) {
-    // origin を日本語で表示するためにマップします。
-    const originJapanese = {
-      'domestic': '国内',
-      'overseas': '国外'
-    };
-  
-    // preprocessingPrices は前処理の価格の合計値です
-    const preprocessingCostString = preprocessingPrices.map(pp => `前処理: ¥${pp}`).join(' + ');
-    return `
-      ${item.name} (${originJapanese[origin]}): ¥${item[origin]}<br>
-      ${preprocessingCostString}<br>
-      付属品合計: ¥${accessoriesTotal}<br>
-      合計: ¥${item[origin] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal}〜
-    `;
-  }
+  // origin を日本語で表示するためにマップします。
+  const originJapanese = {
+    'domestic': '国内',
+    'overseas': '国外'
+  };
+
+  // preprocessingPrices は前処理の価格の合計値です
+  const preprocessingCostString = preprocessingPrices.map(pp => `前処理: ¥${pp}`).join(' + ');
+
+  // 各行にクラスを追加
+  return `
+    <div class="item-name">${item.name} (${originJapanese[origin]}): ¥${item[origin]}</div>
+    <div class="preprocessing-cost">${preprocessingCostString}</div>
+    <div class="accessories-total">付属品合計: ¥${accessoriesTotal}</div>
+    <div class="total">合計: ¥${item[origin] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal}〜</div>
+  `;
+}
+
   
   // 選択されたオプションに基づいて見積もりを計算し表示する関数
   function calculateEstimate() {
@@ -135,23 +138,38 @@ function createEstimateHTML(item, preprocessingPrices, origin, accessoriesTotal)
 // 前処理セレクトボックスを追加する関数
 function addPreprocessingOption() {
   const preprocessingContainer = document.getElementById('preprocessing-container');
+
+  // 新しい div 要素を作成してクラスを追加
+  const selectWrap = document.createElement('div');
+  selectWrap.classList.add('add-select-wrap');
+
+  // 新しい select 要素を作成してクラスを追加
   const newSelect = document.createElement('select');
   newSelect.classList.add('select-preprocessing');
   populateSelectWithOptions(newSelect, preprocessingOptions);
 
+  // 削除ボタンを追加する要素
   const removeButton = document.createElement('button');
   removeButton.textContent = '削除';
   removeButton.type = 'button';
+  removeButton.classList.add('btn-delete');
   removeButton.addEventListener('click', function() {
-    preprocessingContainer.removeChild(newSelect);
-    preprocessingContainer.removeChild(removeButton);
+    preprocessingContainer.removeChild(selectWrap);
     calculateEstimate();
   });
 
+  // change イベントと削除ボタンのイベントリスナーを追加
   newSelect.addEventListener('change', calculateEstimate);
-  preprocessingContainer.appendChild(newSelect);
-  preprocessingContainer.appendChild(removeButton);
+
+  // select を select-wrap に追加
+  selectWrap.appendChild(newSelect);
+  // 削除ボタンを select-wrap に追加
+  selectWrap.appendChild(removeButton);
+
+  // select-wrap を preprocessing-container に追加
+  preprocessingContainer.appendChild(selectWrap);
 }
+
 
 // 付属品のセレクトボックスを追加する関数
 function addAccessoryOption() {
@@ -163,6 +181,7 @@ function addAccessoryOption() {
     const removeButton = document.createElement('button');
     removeButton.textContent = '削除';
     removeButton.type = 'button';
+    removeButton.classList.add('btn-delete');
     removeButton.addEventListener('click', function() {
       accessorySelect.remove();
       removeButton.remove();

@@ -125,3 +125,8 @@ textarea,
 select {
   font: inherit;
 }
+
+select {
+  -webkit-appearance: none;
+  appearance: none; /* デフォルトの矢印を非表示 */
+}
