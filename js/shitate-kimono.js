@@ -171,28 +171,39 @@ function addPreprocessingOption() {
 }
 
 
-// 付属品のセレクトボックスを追加する関数
+/// 付属品のセレクトボックスを追加する関数
 function addAccessoryOption() {
-    const accessoryContainer = document.getElementById('accessory-container');
-    const accessorySelect = document.createElement('select');
-    accessorySelect.classList.add('select-accessory');
-    accessoryContainer.appendChild(accessorySelect);
+  const accessoryContainer = document.getElementById('accessory-container');
   
-    const removeButton = document.createElement('button');
-    removeButton.textContent = '削除';
-    removeButton.type = 'button';
-    removeButton.classList.add('btn-delete');
-    removeButton.addEventListener('click', function() {
-      accessorySelect.remove();
-      removeButton.remove();
+  // 新しく追加するselect要素を生成
+  const accessorySelect = document.createElement('select');
+  accessorySelect.classList.add('select-accessory');
+
+  // 新しく追加する<div>要素を生成
+  const addSelectWrap = document.createElement('div');
+  addSelectWrap.classList.add('add-select-wrap');
+  addSelectWrap.appendChild(accessorySelect);
+
+  // 削除ボタンを生成
+  const removeButton = document.createElement('button');
+  removeButton.textContent = '削除';
+  removeButton.type = 'button';
+  removeButton.classList.add('btn-delete');
+  removeButton.addEventListener('click', function() {
+      addSelectWrap.remove();
       calculateEstimate();
-    });
+  });
+
+  // イベントリスナーを追加
+  accessorySelect.addEventListener('change', calculateEstimate);
   
-    accessorySelect.addEventListener('change', calculateEstimate);
-    populateSelectWithOptions(accessorySelect, accessories);
-    
-    accessoryContainer.appendChild(removeButton);
-  }
+  // セレクトボックスのオプションを設定
+  populateSelectWithOptions(accessorySelect, accessories);
+  
+  // 生成した要素を追加
+  addSelectWrap.appendChild(removeButton);
+  accessoryContainer.appendChild(addSelectWrap);
+}
 
 // ページ読み込み時に実行する関数群
 document.addEventListener('DOMContentLoaded', function() {
