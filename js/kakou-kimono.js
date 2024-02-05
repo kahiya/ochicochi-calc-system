@@ -94,12 +94,11 @@ function populateSelectWithOptions(selectElement, options) {
   selectElement.innerHTML = '';
   options.forEach((option, index) => {
     const opt = document.createElement("option");
-    opt.value = index;
+    opt.value = index; // インデックスをvalue属性に設定
     opt.textContent = option.name;
     selectElement.appendChild(opt);
   });
 }
-
 
 // 付属品の合計コストを計算する関数
 function calculateAccessoriesTotal() {
@@ -131,44 +130,70 @@ function createEstimateHTML(item, preprocessingPrices, origin, accessoriesTotal)
 }
 
 // 前処理の合計金額を計算
+// この関数内で更に詳細なデバッグログを出力する
 function calculatePreprocessingTotal() {
+  console.log("calculatePreprocessingTotal関数が呼び出されました");
   const preprocessingSelects = document.querySelectorAll('.select-preprocessing');
-  return Array.from(preprocessingSelects).reduce((total, select) => {
-    const selectedOption = preprocessingOptions.find(opt => opt.id === select.value);
-    return total + (selectedOption ? selectedOption.price : 0);
-  }, 0);
+  console.log(`preprocessingSelectsの数: ${preprocessingSelects.length}`);
+  let total = 0;
+  preprocessingSelects.forEach((select, index) => {
+      console.log(`選択されたpreprocessingSelectのindex: ${index}, value: ${select.value}`);
+      const optionIndex = parseInt(select.value, 10);
+      if (!isNaN(optionIndex)) {
+          const option = preprocessingOptions[optionIndex];
+          console.log(`選択されたオプション: ${option ? option.name : '未定義'}, 価格: ${option ? option.price : '未定義'}`);
+          total += (option ? option.price : 0);
+      }
+  });
+  console.log(`前処理の合計金額: ${total}`);
+  return total;
 }
 
-// 付属品の合計金額を計算
 function calculateAccessoriesTotal() {
+  console.log("calculateAccessoriesTotal関数が呼び出されました");
   const accessoriesSelects = document.querySelectorAll('.select-accessory');
-  return Array.from(accessoriesSelects).reduce((total, select) => {
-    const selectedOption = accessories.find(opt => opt.id === select.value);
-    return total + (selectedOption ? selectedOption.price : 0);
-  }, 0);
+  console.log(`accessoriesSelectの数: ${accessoriesSelects.length}`);
+  let total = 0;
+  accessoriesSelects.forEach((select, index) => {
+      console.log(`選択されたaccessorySelectのindex: ${index}, value: ${select.value}`);
+      const optionIndex = parseInt(select.value, 10);
+      if (!isNaN(optionIndex)) {
+          const option = accessories[optionIndex];
+          console.log(`選択されたオプション: ${option ? option.name : '未定義'}, 価格: ${option ? option.price : '未定義'}`);
+          total += (option ? option.price : 0);
+      }
+  });
+  console.log(`付属品の合計金額: ${total}`);
+  return total;
 }
-
-  
  
 // 見積もりを計算し表示する
 function calculateEstimate() {
+  console.log("calculateEstimate関数が呼び出されました");
+
+  // 加工オプションの価格を取得
   const itemIndex = document.getElementById("item").value;
   const selectedItem = items[itemIndex];
   const origin = document.getElementById("origin").value;
   const modIndex = document.getElementById("modification").value;
   const selectedModification = selectedItem.modifications[modIndex];
+
+
   
   // 加工オプションの価格を取得
   const price = selectedModification[origin]; // 国内または海外価格を選択
+  console.log(`選択された加工オプションの価格: ${price}`);
   
   // 前処理の合計価格を計算
   const preprocessingTotal = calculatePreprocessingTotal();
   
+  console.log("付属品の合計金額を計算します...");
   // 付属品の合計価格を計算
   const accessoriesTotal = calculateAccessoriesTotal();
-  
+
   // 最終的な見積もり（加工オプションの価格 + 前処理合計 + 付属品合計）
-  const finalEstimate = price + preprocessingTotal + accessoriesTotal;
+    const finalEstimate = price + preprocessingTotal + accessoriesTotal;
+    console.log(`最終的な見積もり合計金額: ${finalEstimate}`);
   
   // 見積もり結果を表示
   document.getElementById("estimate").innerHTML = `
@@ -226,77 +251,59 @@ document.addEventListener('DOMContentLoaded', () => {
 // 前処理セレクトボックスを追加する関数
 function addPreprocessingOption() {
   const preprocessingContainer = document.getElementById('preprocessing-container');
-
-  // 新しい div 要素を作成してクラスを追加
   const selectWrap = document.createElement('div');
   selectWrap.classList.add('add-select-wrap');
-
-  // 新しい select 要素を作成してクラスを追加
+  
   const newSelect = document.createElement('select');
   newSelect.classList.add('select-preprocessing');
-  populateSelectWithOptions(newSelect, preprocessingOptions);
+  populateSelectWithOptions(newSelect, preprocessingOptions); // オプションを設定
 
-  // 削除ボタンを追加する要素
   const removeButton = document.createElement('button');
   removeButton.textContent = '削除';
   removeButton.type = 'button';
   removeButton.classList.add('btn-delete');
   removeButton.addEventListener('click', function() {
     preprocessingContainer.removeChild(selectWrap);
-    calculateEstimate();
+    // 再計算を実行する必要がある場合はここにコードを追加
   });
 
-  // change イベントと削除ボタンのイベントリスナーを追加
-  newSelect.addEventListener('change', calculateEstimate);
+  newSelect.addEventListener('change', calculateEstimate); // ★変更監視を追加
 
-  // select を select-wrap に追加
   selectWrap.appendChild(newSelect);
-  // 削除ボタンを select-wrap に追加
   selectWrap.appendChild(removeButton);
-
-  // select-wrap を preprocessing-container に追加
   preprocessingContainer.appendChild(selectWrap);
 }
-
 
 /// 付属品のセレクトボックスを追加する関数
 function addAccessoryOption() {
   const accessoryContainer = document.getElementById('accessory-container');
-  
-  // 新しく追加するselect要素を生成
-  const accessorySelect = document.createElement('select');
-  accessorySelect.classList.add('select-accessory');
+  const selectWrap = document.createElement('div');
+  selectWrap.classList.add('add-select-wrap');
 
-  // 新しく追加する<div>要素を生成
-  const addSelectWrap = document.createElement('div');
-  addSelectWrap.classList.add('add-select-wrap');
-  addSelectWrap.appendChild(accessorySelect);
+  const newSelect = document.createElement('select');
+  newSelect.classList.add('select-accessory');
+  populateSelectWithOptions(newSelect, accessories); // オプションを設定
 
-  // 削除ボタンを生成
   const removeButton = document.createElement('button');
   removeButton.textContent = '削除';
   removeButton.type = 'button';
   removeButton.classList.add('btn-delete');
   removeButton.addEventListener('click', function() {
-      addSelectWrap.remove();
-      calculateEstimate();
+    accessoryContainer.removeChild(selectWrap);
+    // 再計算を実行する必要がある場合はここにコードを追加
   });
 
-  // イベントリスナーを追加
-  accessorySelect.addEventListener('change', calculateEstimate);
-  
-  // セレクトボックスのオプションを設定
-  populateSelectWithOptions(accessorySelect, accessories);
-  
-  // 生成した要素を追加
-  addSelectWrap.appendChild(removeButton);
-  accessoryContainer.appendChild(addSelectWrap);
+  newSelect.addEventListener('change', calculateEstimate); // ★変更監視を追加
+
+  selectWrap.appendChild(newSelect);
+  selectWrap.appendChild(removeButton);
+  accessoryContainer.appendChild(selectWrap);
 }
 
 // ページ読み込み時に実行する関数群
 document.addEventListener('DOMContentLoaded', function() {
-  populateSelectWithOptions(document.getElementById("item"), items);
-  // addPreprocessingOption の最初の呼び出しで初期の前処理セレクトボックスを追加
+  populateSelectWithOptions(document.getElementById("preprocessing"), preprocessingOptions);
+  populateSelectWithOptions(document.getElementById("accessory"), accessories); // 仮にこのIDが正しいと仮定
   addPreprocessingOption();
   addAccessoryOption();
 
