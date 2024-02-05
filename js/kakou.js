@@ -38,6 +38,16 @@ const prices = {
         }
     }
 };
+
+// 前処理の料金
+const preprocessingPrices = {
+    'なし': 0,
+    '湯のし': 1000,
+    '筋消し': 3000
+};
+
+
+
 document.getElementById('product').addEventListener('change', function() {
     updateServices();
     calculateCost(); // 加工内容が更新されるたびに自動的に見積もりを表示
@@ -65,40 +75,44 @@ function updateServices() {
     calculateCost(); // 加工内容の選択肢が更新されるたびに見積もりを自動的に更新
 }
 
-/* calculateCost と他の関数は変更なし */
+// 以前定義されたイベントリスナーに加え、前処理が変わった場合も処理を実行
+document.getElementById('preprocessing').addEventListener('change', calculateCost);
+// calculateCost 関数を更新して、前処理のコストも含める
 
-// updateServices と calculateCost 関数は以前のセクションに加えて、以下のように calculateCost 関数を拡張します。
 
+
+// calculateCost 関数を更新して、前処理のコストも含める
 function calculateCost() {
     const product = document.getElementById('product').value;
     const location = document.getElementById('location').value;
     const service = document.getElementById('service').value;
-    const cost = prices[product][location][service];
+    const preprocessing = document.getElementById('preprocessing').value;
+    
+    // 前処理のコストを取得（数値として）
+    const preprocessCost = preprocessingPrices[preprocessing] || 0;
+    
+    // 加工内容の価格を取得（数値として）
+    let serviceCost = prices[product] && prices[product][location] && prices[product][location][service];
+    if (typeof serviceCost === 'string') {
+        serviceCost = parseInt(serviceCost.replace("¥", "").replace(/,/g, ""), 10);
+    }
+
+    // 総コストの計算
+    const totalCost = serviceCost + preprocessCost;
+
+    // 内訳と合計コストの表示処理
     const detailsElement = document.getElementById('details');
-    const CostElement = document.getElementById('totalCost');
+    const costElement = document.getElementById('totalCost');
 
-    // 内訳をクリア
-    detailsElement.innerHTML = '';
+    detailsElement.innerHTML = `<p>商品: ${product}</p>
+                                <p>加工地: ${location}</p>
+                                <p>加工内容: ${service}: ¥${serviceCost.toLocaleString()}</p>
+                                <p>前処理: ${preprocessing}: ¥${preprocessCost.toLocaleString()}</p>`;
 
-    // 新しい内訳を追加
-    const productDetail = document.createElement('p');
-    productDetail.textContent = `商品: ${product}`;
-    detailsElement.appendChild(productDetail);
-
-    const locationDetail = document.createElement('p');
-    locationDetail.textContent = `加工地: ${location}`;
-    detailsElement.appendChild(locationDetail);
-
-    const serviceDetail = document.createElement('p');
-    serviceDetail.textContent = `加工内容: ${service} - ¥${cost.toLocaleString()}`;
-    detailsElement.appendChild(serviceDetail);
-
-    // 合計コストを表示
-    CostElement.textContent = `合計: ¥${cost.toLocaleString()}`;
+    costElement.textContent = `合計: ¥${totalCost.toLocaleString()}`;
 }
 
-// 初期加工内容の更新
-updateServices();
 
-// 初期加工内容の更新
+// 最初にページが読み込まれたときの実行
 updateServices();
+calculateCost(); // 初期状態での計算も行います
