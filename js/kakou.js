@@ -1,234 +1,104 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const kimonoType = document.getElementById('kimonoType');
-    const accessoriesType = document.getElementById('accessoriesType');
-    const customPriceInput = document.getElementById('customPrice');
-    const detailsElement = document.getElementById('details');
-    const totalPriceElement = document.getElementById('totalValue');
-    const modificationsContainer = document.getElementById('modificationsContainer');
-    const accessoryContainer = document.getElementById('accessory-container');
-
-    let totalPrice = 0;
-    let selectedModifications = [];
-    let selectedAccessories = [];
-    let customPrice = 0;
-
-    const prices = {
-        kimono: { '裄直し': 8250, '袖丈直し': 8250, '身巾直し': 16500, '身丈直し': 16500, '胴裏交換': 13200, '八掛交換': 13200 },
-        juban: { '裄直し': 6600, '袖丈直し': 6600, '身巾直し': 13200, '身丈直し': 13200 },
-        tomesode: { '裄直し': 9900, '身巾直し': 19800, '身丈直し': 19800, '胴裏交換': 16500 },
-        accessories: { 'fan': 1200, 'obi': 2400, 'obiage': 3600 },
-        custom: { 'その他加工賃': 0 }
-    };
-
-    // 付属品データ
-    const accessories = [
-        { name: '八掛（精華）', price: 9900 },
-        { name: '八掛（駒）', price: 9900 },
-        { name: '胴裏（正絹）', price: 9900 },
-        { name: '振袖胴裏', price: 14300 },
-        { name: '片裏', price: 12100 },
-        { name: '背伏（正絹）', price: 770 },
-        { name: '背伏（ポリ）', price: 660 },
-        { name: '衣紋抜き', price: 990 },
-        { name: '居敷当（着物）', price: 2750 },
-        { name: '居敷当（襦袢）', price: 2420 },
-        { name: '衿裏（正絹）', price: 2200 },
-        { name: '絽衿裏（正絹）', price: 2750 },
-        { name: '衿裏（ポリ）', price: 550 },
-        { name: '絽衿裏（ポリ）', price: 1100 },
-        { name: '台衿（衿芯）', price: 660 }
-    ];
-
-    const items = {
-        // ここにアイテムの情報を追加してください
-        'item1': { 'domestic': 10000, 'overseas': 12000 },
-        'item2': { 'domestic': 15000, 'overseas': 18000 },
-        // ...
-    };
-
-    const preprocessingOptions = {
-        // ここに前処理オプションの情報を追加してください
-        'preprocessing1': { 'name': 'Preprocessing 1', 'price': 5000 },
-        'preprocessing2': { 'name': 'Preprocessing 2', 'price': 8000 },
-        // ...
-    };
-
-    function updateTotalPrice() {
-        totalPrice = selectedModifications.reduce((acc, item) => acc + prices[item.type][item.name], 0)
-            + selectedAccessories.reduce((acc, item) => acc + prices.accessories[item.type], 0)
-            + customPrice;
-        totalPriceElement.innerText = `¥${totalPrice.toLocaleString()}`;
-    }
-
-    function populateSelectWithOptions(selectElement, options) {
-        options.forEach((option, index) => {
-            const optionElement = document.createElement('option');
-            optionElement.value = index;
-            optionElement.textContent = option.name;
-            selectElement.appendChild(optionElement);
-        });
-    }
-
-    kimonoType.addEventListener('change', function () {
-        const type = kimonoType.value;
-        modificationsContainer.innerHTML = ''; // コンテナを空にする
-        if (type) {
-            const selectElement = document.createElement('select');
-            selectElement.innerHTML = '<option value="">加工を選択してください</option>';
-            Object.keys(prices[type]).forEach((mod) => {
-                selectElement.innerHTML += `<option value="${mod}">${mod}</option>`;
-            });
-            modificationsContainer.appendChild(selectElement);
-            selectElement.addEventListener('change', function () {
-                if (selectElement.value) {
-                    const modName = selectElement.value;
-                    selectedModifications.push({ type: type, name: modName });
-                    updateTotalPrice();
-                    updateDetails();
-                }
-            });
+const prices = {
+    '着物': {
+        '国内': {
+            '裄直し': 18700,
+            '袖丈直し': 12100,
+            '身巾直し': 26400,
+            '身丈直し（内揚げ）': 26400,
+            '身丈直し（裾）': 14300,
+            '胴裏交換': 28600,
+            '八掛交換': 26400,
+            'バチ衿→広衿': 13200,
+            '広衿→バチ衿': 13200
+        },
+        '海外': {
+            '裄直し': 12100,
+            '袖丈直し': 9900,
+            '身巾直し': 15400,
+            '身丈直し（内揚げ）': 13200,
+            '身丈直し（裾）': 12100,
+            '胴裏交換': 15400,
+            '八掛交換': 13200
         }
-    });
-
-    accessoriesType.addEventListener('change', function () {
-        // 既存の付属品選択をクリアする
-        selectedAccessories = [];
-        const type = accessoriesType.value;
-        const text = accessoriesType.options[accessoriesType.selectedIndex].text;
-        if (type) {
-            selectedAccessories.push({ type: type, text: text });
-            updateTotalPrice();
-            updateDetails();
-        }
-    });
-
-    customPriceInput.addEventListener('input', function () {
-        const value = parseFloat(customPriceInput.value);
-        if (!isNaN(value)) {
-            customPrice = value;
-        } else {
-            customPrice = 0;
-        }
-        updateTotalPrice();
-        updateDetails();
-    });
-
-    function updateDetails() {
-        detailsElement.innerHTML = '';
-
-        selectedModifications.forEach((item, index) => {
-            const li = document.createElement('li');
-            li.textContent = `${item.name} - ¥${prices[item.type][item.name].toLocaleString()}`;
-            const removeButton = document.createElement('button');
-            removeButton.textContent = '削除';
-            removeButton.onclick = function () {
-                selectedModifications.splice(index, 1);
-                updateTotalPrice();
-                updateDetails();
-            };
-            li.appendChild(removeButton);
-            detailsElement.appendChild(li);
-        });
-
-        selectedAccessories.forEach((item, index) => {
-            const li = document.createElement('li');
-            li.textContent = `${item.text} - ¥${prices.accessories[item.type].toLocaleString()}`;
-            const removeButton = document.createElement('button');
-            removeButton.textContent = '削除';
-            removeButton.onclick = function () {
-                selectedAccessories.splice(index, 1);
-                updateTotalPrice();
-                updateDetails            };
-                li.appendChild(removeButton);
-                detailsElement.appendChild(li);
-            });
-
-        if (customPrice > 0) {
-            const li = document.createElement('li');
-            li.textContent = `その他加工賃 - ¥${customPrice.toLocaleString()}`;
-            const removeButton = document.createElement('button');
-            removeButton.textContent = '削除';
-            removeButton.onclick = function () {
-                customPrice = 0;
-                customPriceInput.value = '';
-                updateTotalPrice();
-                updateDetails();
-            };
-            li.appendChild(removeButton);
-            detailsElement.appendChild(li);
+    },
+    '襦袢': {
+        '国内': {
+            '裄直し': 16500,
+            '袖丈直し': 9900,
+            '身巾直し': 16500,
+            '身丈直し（内揚げ）': 16500,
+            '身丈直し（裾）': 9900
+        },
+        '海外': {
+            '裄直し': 9900,
+            '袖丈直し': 9900,
+            '身巾直し': 12100,
+            '身丈直し（内揚げ）': 12100,
+            '身丈直し（裾）': 9900
         }
     }
-
-    function calculateAccessoriesTotal() {
-        const accessorySelects = document.querySelectorAll('.select-accessory');
-        return Array.from(accessorySelects).reduce((total, select) => {
-            const accessory = accessories[select.value];
-            return total + (accessory ? accessory.price : 0);
-        }, 0);
-    }
-
-    function createEstimateHTML(item, preprocessingPrices, accessoriesTotal) {
-        const preprocessingCostString = preprocessingPrices.map(pp => `前処理: ¥${pp}`).join(' + ');
-
-        return `
-        <div class="item-name">${item.name}: ¥${item.domestic} (国内) / ¥${item.overseas} (国外)</div>
-        <div class="preprocessing-cost">${preprocessingCostString}</div>
-        <div class="accessories-total">付属品合計: ¥${accessoriesTotal}</div>
-        <div class="total">合計: ¥${item.domestic + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal} (国内) / ¥${item.overseas + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal} (国外) 〜</div>
-    `;
-    }
-
-    function calculateEstimate() {
-        // 以下の1行を追加し、#estimate要素が存在しない場合は処理を中断します
-        const estimateDiv = document.getElementById("estimate");
-        if (!estimateDiv) return;
-    
-        const selectedItem = items['item1']; // ここを適切なアイテムに変更する必要があります
-        const accessoriesTotal = calculateAccessoriesTotal();
-    
-        const preprocessingPrices = Array.from(document.querySelectorAll('.select-preprocessing')).map(select => {
-            const preprocessingOption = preprocessingOptions[select.value];
-            return preprocessingOption ? preprocessingOption.price : 0;
-        });
-    
-        const domesticCost = selectedItem['domestic'] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal;
-        const overseasCost = selectedItem['overseas'] + preprocessingPrices.reduce((a, b) => a + b, 0) + accessoriesTotal;
-    
-        estimateDiv.innerHTML = createEstimateHTML(selectedItem, preprocessingPrices, accessoriesTotal);
-    
-        // 合計金額を更新
-        totalPrice = 0; // ここを適切な合計金額に変更する必要があります
-        totalPriceElement.innerText = `¥${totalPrice.toLocaleString()}`;
-    }
-    
-
-    function addAccessoryOption() {
-        const selectWrap = document.createElement('div');
-        selectWrap.classList.add('add-select-wrap');
-
-        const newSelect = document.createElement('select');
-        newSelect.classList.add('select-accessory');
-        populateSelectWithOptions(newSelect, accessories);
-
-        const removeButton = document.createElement('button');
-        removeButton.textContent = '削除';
-        removeButton.type = 'button';
-        removeButton.classList.add('btn-delete');
-        removeButton.addEventListener('click', function () {
-            accessoryContainer.removeChild(selectWrap);
-            calculateEstimate();  // この行を削除
-        });
-
-        newSelect.addEventListener('change', calculateEstimate);
-
-        selectWrap.appendChild(newSelect);
-        selectWrap.appendChild(removeButton);
-        accessoryContainer.appendChild(selectWrap);
-    }
-
-    document.getElementById('add-accessory').addEventListener('click', addAccessoryOption);
-
-    calculateEstimate();
+};
+document.getElementById('product').addEventListener('change', function() {
+    updateServices();
+    calculateCost(); // 加工内容が更新されるたびに自動的に見積もりを表示
 });
+document.getElementById('location').addEventListener('change', function() {
+    updateServices();
+    calculateCost(); // 加工内容が更新されるたびに自動的に見積もりを表示
+});
+document.getElementById('service').addEventListener('change', calculateCost); // 加工内容が変更されたときに見積もりを自動的に表示
 
+// updateServices の最後にも calculateCost を呼び出して、サービスの選択肢が変更されたときにも自動的に合計を更新
+function updateServices() {
+    const product = document.getElementById('product').value;
+    const location = document.getElementById('location').value;
+    const serviceSelect = document.getElementById('service');
+    serviceSelect.innerHTML = '';
 
+    const services = prices[product][location];
+    Object.keys(services).forEach(service => {
+        const option = document.createElement('option');
+        option.value = service;
+        option.textContent = service;
+        serviceSelect.appendChild(option);
+    });
+    calculateCost(); // 加工内容の選択肢が更新されるたびに見積もりを自動的に更新
+}
+
+/* calculateCost と他の関数は変更なし */
+
+// updateServices と calculateCost 関数は以前のセクションに加えて、以下のように calculateCost 関数を拡張します。
+
+function calculateCost() {
+    const product = document.getElementById('product').value;
+    const location = document.getElementById('location').value;
+    const service = document.getElementById('service').value;
+    const cost = prices[product][location][service];
+    const detailsElement = document.getElementById('details');
+    const CostElement = document.getElementById('totalCost');
+
+    // 内訳をクリア
+    detailsElement.innerHTML = '';
+
+    // 新しい内訳を追加
+    const productDetail = document.createElement('p');
+    productDetail.textContent = `商品: ${product}`;
+    detailsElement.appendChild(productDetail);
+
+    const locationDetail = document.createElement('p');
+    locationDetail.textContent = `加工地: ${location}`;
+    detailsElement.appendChild(locationDetail);
+
+    const serviceDetail = document.createElement('p');
+    serviceDetail.textContent = `加工内容: ${service} - ¥${cost.toLocaleString()}`;
+    detailsElement.appendChild(serviceDetail);
+
+    // 合計コストを表示
+    CostElement.textContent = `合計: ¥${cost.toLocaleString()}`;
+}
+
+// 初期加工内容の更新
+updateServices();
+
+// 初期加工内容の更新
+updateServices();
