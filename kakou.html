@@ -10,6 +10,7 @@
 <body>
 <div id="app">
     <h2>着物加工見積もりシステム</h2>
+    <form id="estimate-form">
     <div>
         <label for="product">商品:</label>
         <select id="product" name="product">
@@ -35,10 +36,55 @@
             <option value="湯のし">湯のし</option>
             <option value="筋消し">筋消し</option>
         </select>
+        <!-- 既存の前処理選択肢の直下に配置 -->
+<div id="preprocessingContainer"></div> <!-- 動的に前処理選択肢を追加するコンテナ -->
+<button type="button" id="addPreprocessing">前処理を追加する</button>
+    </div>
+
+    <div>
+        <label for="accessories">付属品:</label>
+        <div id="accessoriesContainer"></div> <!-- 動的に付属品選択肢を追加するコンテナ -->
+        <button type="button" id="addAccessory">付属品を追加する</button>
     </div>
     <div id="details"></div> <!-- 内訳を表示するためのセクション -->
     <div id="totalCost">合計: </div>
+
+    <h3 class="customer-header">お客様の情報</h3>
+    <div class="form-field">
+      <label for="name" class="form-label">名前：</label>
+      <input type="text" id="name" name="name" class="customer-input" required>
+    </div>
+
+    <div class="form-field">
+      <label for="furigana" class="form-label">フリガナ：</label>
+      <input type="text" id="furigana" name="furigana" class="customer-input" required>
+    </div>
+
+    <div class="form-field">
+      <label for="phone" class="form-label">電話番号：</label>
+      <input type="tel" id="phone" name="phone" class="customer-input" required>
+    </div>
+
+    <div class="form-field">
+      <label for="email" class="form-label">メールアドレス：</label>
+      <input type="email" id="email" class="customer-input" name="email" >
+    </div>
+
+    <div class="form-field">
+      <label for="postal-code" class="form-label">郵便番号：</label>
+      <input type="text" id="postal-code" name="postal-code" class="customer-input-sm" required>
+    </div>
+
+    <div class="form-field">
+      <label for="address" class="form-label">住所：</label>
+      <input type="text" id="address" name="address" class="customer-input" required>
+    </div>
+
+    <button id="download-csv">CSVダウンロード</button>
+    <button id="print">印刷</button>
 </div>
 <script src="js/kakou.js"></script>
+<script src="js/csv-download.js"></script>
+<script src="js/print.js"></script>
 </body>
 </html>
