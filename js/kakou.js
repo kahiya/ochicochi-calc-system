@@ -102,13 +102,14 @@ document.getElementById('preprocessing').addEventListener('change', calculateCos
 // calculateCost 関数を更新して、前処理のコストも含める
 
 
-document.getElementById('addPreprocessing').addEventListener('click', function() {
-    const preprocessingContainer = document.getElementById('preprocessingContainer');
-    
-    // 新しい前処理選択肢用のラッパーを作成（選択肢と削除ボタンをグループ化）
+document.getElementById('add-preprocessing').addEventListener('click', function() {
+    const preprocessingContainer = document.getElementById('preprocessing-container');
     const preprocessingWrapper = document.createElement('div');
-    
+    preprocessingWrapper.classList.add("add-select-wrap");
+
     const newSelect = document.createElement('select');
+    newSelect.classList.add("select-preprocessing");
+
     newSelect.innerHTML = `
         <option value="なし">なし</option>
         <option value="湯のし">湯のし</option>
@@ -116,33 +117,33 @@ document.getElementById('addPreprocessing').addEventListener('click', function()
     `;
     newSelect.name = 'preprocessing[]';
     newSelect.addEventListener('change', calculateCost);
-    
-    // 削除ボタンを作成
+
+    preprocessingWrapper.appendChild(newSelect);
+
+    // 削除ボタンを作成し、クラスを追加
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '削除';
     deleteButton.type = 'button';
-    
-    // 削除ボタンのクリックイベント
+    deleteButton.classList.add("btn-delete"); // クラスの追加
+
     deleteButton.addEventListener('click', function() {
-        preprocessingWrapper.remove(); // この選択肢を削除
-        calculateCost(); // コスト再計算
+        preprocessingWrapper.remove();
+        calculateCost();
     });
-    
-    // ラッパーに選択肢と削除ボタンを追加
-    preprocessingWrapper.appendChild(newSelect);
+
     preprocessingWrapper.appendChild(deleteButton);
-    
-    // コンテナにラッパーを追加
     preprocessingContainer.appendChild(preprocessingWrapper);
 });
 
 
-document.getElementById('addAccessory').addEventListener('click', function() {
-    const accessoryContainer = document.getElementById('accessoriesContainer');
-    
+document.getElementById('add-accessory').addEventListener('click', function() {
+    const accessoryContainer = document.getElementById('accessory-container');
     const accessoryWrapper = document.createElement('div');
-    
+    accessoryWrapper.classList.add("add-select-wrap");
+
     const newSelect = document.createElement('select');
+    newSelect.classList.add("select-accessory");
+
     Object.keys(accessoriesPrices).forEach(accessory => {
         const option = document.createElement('option');
         option.value = accessory;
@@ -151,79 +152,82 @@ document.getElementById('addAccessory').addEventListener('click', function() {
     });
     newSelect.name = 'accessories[]';
     newSelect.addEventListener('change', calculateCost);
-    
+
+    accessoryWrapper.appendChild(newSelect);
+
+    // 削除ボタンを作成し、クラスを追加
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '削除';
     deleteButton.type = 'button';
+    deleteButton.classList.add("btn-delete"); // クラスの追加
+
     deleteButton.addEventListener('click', function() {
         accessoryWrapper.remove();
-        calculateCost(); // コスト再計算
+        calculateCost();
     });
-    
-    accessoryWrapper.appendChild(newSelect);
+
     accessoryWrapper.appendChild(deleteButton);
-    
     accessoryContainer.appendChild(accessoryWrapper);
 });
 
 
-// calculateCost 関数を更新して、前処理のコストも含める
 function calculateCost() {
     const product = document.getElementById('product').value;
     const location = document.getElementById('location').value;
     const service = document.getElementById('service').value;
     const preprocessing = document.getElementById('preprocessing').value;
-    
-// 前処理のコストを取得（数値として）
-// ここで修正: 最初の前処理選択肢も含めるようにセレクタを変更
-const preprocessingElements = document.querySelectorAll('#preprocessing, [name="preprocessing[]"]');
-let preprocessCost = Array.from(preprocessingElements).reduce((total, elem) => {
-    return total + (preprocessingPrices[elem.value] || 0);
-}, 0);
-
-    // 加工内容の価格を取得（数値として）
-    let serviceCost = prices[product] && prices[product][location] && prices[product][location][service];
-    if (typeof serviceCost === 'string') {
-        serviceCost = parseInt(serviceCost.replace("¥", "").replace(/,/g, ""), 10);
-    }
-
-    // 付属品のコストを取得
-    const accessoriesElements = document.querySelectorAll('[name="accessories[]"]');
-    let accessoriesCost = Array.from(accessoriesElements).reduce((total, elem) => {
-        return total + (accessoriesPrices[elem.value] || 0);
-    }, 0);
-
-    // 総コストの計算
-    const totalCost = serviceCost + preprocessCost + accessoriesCost;
-
-  // 付属品の内訳情報を更新
-  let accessoriesDetails = '';
-  accessoriesElements.forEach(elem => {
-      accessoriesDetails += `<p>付属品: ${elem.value}: ¥${accessoriesPrices[elem.value].toLocaleString()}</p>`
-  });
-
-
-    // 内訳と合計コストの表示処理
     const detailsElement = document.getElementById('details');
     const costElement = document.getElementById('totalCost');
 
- // 前処理の内訳情報を更新（すべての選択された前処理を列挙）
-    let preprocessingDetails = '';
-    preprocessingElements.forEach(elem => {
-        if (elem.value !== 'なし') {
-            preprocessingDetails += `<p>前処理: ${elem.value}: ¥${preprocessingPrices[elem.value].toLocaleString()}</p>`
-        }
-    });
-    
-    // 内訳と合計コストの表示処理を更新
-    detailsElement.innerHTML = `<p>商品: ${product}</p>
-    <p>加工地: ${location}</p>
-    <p>加工内容: ${service}: ¥${serviceCost.toLocaleString()}</p>`
-    + preprocessingDetails + accessoriesDetails;
+    // 前処理のコストを取得
+    let preprocessCost = preprocessingPrices[preprocessing] || 0;
 
-    costElement.textContent = `合計: ¥${totalCost.toLocaleString()}`;
+    // 加工内容の価格を取得
+    let serviceCost = prices[product][location][service] || 0;
+
+    // 付属品のコストを取得
+    const accessorySelectors = document.querySelectorAll('[name="accessories[]"]');
+    let accessoriesCost = Array.from(accessorySelectors).reduce((total, selector) => {
+        return total + (accessoriesPrices[selector.value] || 0);
+    }, 0);
+
+    // その他加工賃の取得
+    const otherFeeElement = document.getElementById('other-fee');
+    const otherFee = otherFeeElement ? parseInt(otherFeeElement.value) || 0 : 0;
+
+    // 合計コストを計算
+    const totalPrice = serviceCost + preprocessCost + accessoriesCost + otherFee;
+
+    // 前処理の内訳情報を更新
+    let preprocessingDetails = '';
+    if (preprocessing !== 'なし') {
+        preprocessingDetails += `<p>前処理: ${preprocessing}: ¥${preprocessingPrices[preprocessing].toLocaleString()}</p>`;
+    }
+
+    // 付属品の内訳情報を更新
+    let accessoriesDetails = '';
+    accessorySelectors.forEach(selector => {
+        accessoriesDetails += `<p>付属品: ${selector.value}: ¥${accessoriesPrices[selector.value].toLocaleString()}</p>`;
+    });
+
+    // 内訳と合計コストの表示を更新
+    detailsElement.innerHTML = `<p>商品: ${product}</p>
+                                <p>加工地: ${location}</p>
+                                <p>加工内容: ${service}: ¥${serviceCost.toLocaleString()}</p>
+                                ${preprocessingDetails}
+                                ${accessoriesDetails}`;
+
+    // その他加工賃があれば表示する
+    if (otherFee > 0) {
+        detailsElement.innerHTML += `<p>その他加工賃: ¥${otherFee.toLocaleString()}</p>`;
+    }
+
+    // 合計コストを表示
+    costElement.textContent = `合計: ¥${totalPrice.toLocaleString()}〜`;
 }
 
+// その他加工賃の入力変更時にも計算を更新
+document.getElementById('other-fee').addEventListener('input', calculateCost);
 
 // 最初にページが読み込まれたときの実行
 updateServices();
