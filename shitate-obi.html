@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>着物加工見積もりシステム</title>
-<link rel="stylesheet" href="css/kakou.css">
+<title>帯仕立て見積もりシステム</title>
+<link rel="stylesheet" href="css/shitate-obi.css">
 <link rel="stylesheet" href="css/reset.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/print.css">
@@ -20,54 +20,31 @@
         <a href="kakou.html" class="menu-item kakou">加工</a>
     </div>
     <div class="form-wrap">
-    <h2 class="title">着物加工見積もりシステム</h2>
+    <h2 class="title">帯仕立て見積もりシステム</h2>
     <form id="estimate-form">
     <div class="form-field">
         <label for="product" class="form-label">商品:</label>
         <div class="select-wrap">
             <select id="product" name="product" class="form-select">
-                <option value="着物">着物</option>
-                <option value="襦袢">襦袢</option>
+                <option value="袋帯 本仕立て（芯別）">袋帯 本仕立て（芯別）</option>
+                <option value="袋帯 芯取り替え（芯別）">袋帯 芯取り替え（芯別）</option>
+                <option value="九寸名古屋帯 本仕立て（芯別）">九寸名古屋帯 本仕立て（芯別）</option>
+                <option value="九寸名古屋帯 平仕立">九寸名古屋帯 平仕立</option>
+                <option value="九寸名古屋帯 芯取り替え（芯別）">九寸名古屋帯 芯取り替え（芯別）</option>
+                <option value="八寸名古屋帯 松葉仕立て">八寸名古屋帯 松葉仕立て</option>
+                <option value="八寸名古屋帯 総かがり">八寸名古屋帯 総かがり</option>
+                <option value="半幅帯 角帯">半幅帯 角帯</option>
+                <option value="作り帯（切らないタイプ）">作り帯（切らないタイプ）</option>
+                <option value="作り帯（切るタイプ）">作り帯（切るタイプ）</option>
+                <option value="シワ・折りくせたたみ直し">シワ・折りくせたたみ直し</option>
             </select>
         </div>
-    </div>
-    <div class="form-field">
-        <label for="location" class="form-label">加工地:</label>
-        <div class="select-wrap">
-            <select id="location" name="location" class="form-select">
-                <option value="国内">国内</option>
-                <option value="海外">海外</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-field">
-        <label for="service" class="form-label">加工内容:</label>
-        <div class="select-wrap">
-            <select id="service" name="service" class="form-select"></select>
-        </div>
-    </div>
-    <div class="form-field">
-        <label for="preprocessing" class="form-label">前処理:</label>
-        <button type="button" id="add-preprocessing">前処理を追加する</button>
-        <div class="add-select-wrap">
-            <select id="preprocessing" name="preprocessing" class="select-preprocessing">
-                <option value="なし">なし</option>
-                <option value="湯のし">湯のし</option>
-                <option value="筋消し">筋消し</option>
-            </select>
-        </div>
-        <!-- 既存の前処理選択肢の直下に配置 -->
-<div id="preprocessing-container" class="form-field"></div> <!-- 動的に前処理選択肢を追加するコンテナ -->
     </div>
 
     <div class="form-field">
         <label for="accessories" class="form-label">付属品:</label>
         <button type="button" id="add-accessory">付属品を追加する</button>
         <div id="accessory-container"></div> <!-- 動的に付属品選択肢を追加するコンテナ -->
-    </div>
-    <div class="form-field">
-        <label for="other-fee" class="form-label">その他加工賃：</label>
-        <input type="number" id="other-fee" name="other-fee" value="0" class="form-input">
     </div>
     <div id="estimate-result" class="estimate-result">
         <p class="result-header">見積もり結果</p>
@@ -122,7 +99,7 @@
         <p class="company-tel">電話番号：075-344-4566</p>
       </div>  
 </div>
-<script src="js/kakou.js"></script>
+<script src="js/shitate-obi.js"></script>
 <script src="js/csv-download.js"></script>
 <script src="js/print.js"></script>
 </body>
