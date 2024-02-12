@@ -1,0 +1,58 @@
+/* サイズ =========================  */
+.main-wrap {
+    background-color: var(--col-base1);
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 40px 0;
+    height: 100vh;
+  }
+
+/* main-wrapの中身 =========================  */
+.menu-bg {
+    width: 80%;
+    margin: auto;
+    height: 100vh;
+}
+
+.main-title {
+    padding: 50px;
+    margin: auto;
+    color: #6a6863;
+    text-align: center;
+}
+
+.top-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 100px 0;
+}
+
+
+.top-menu-item {
+    padding: 40px 20px;
+    width: 70%;
+    font-size: 22px;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    border-right: 1px solid #fff;
+    border-radius: 10px;
+}
+
+.shitate {
+    background-color: var(--col-pink1);
+}
+
+.kakou {
+    background-color: var(--col-green1);
+}
+
+.obi {
+    background-color: var(--col-yel1);
+}
