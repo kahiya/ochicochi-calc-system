@@ -42,7 +42,13 @@
     color: #fff;
     text-align: center;
     border-right: 1px solid #fff;
-    border-radius: 10px;
+    border-radius: 60px;
+    box-shadow: 0 5px 5px rgba(60, 55, 75, 0.3); ;
+    transition: transform .2s;
+}
+
+.top-menu-item:active {
+    transform: scale(.95);
 }
 
 .shitate {
