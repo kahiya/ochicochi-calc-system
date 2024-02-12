@@ -52,6 +52,7 @@ body {
   margin-bottom: 5px;
   letter-spacing: 0.1rem;
   width: 150px;
+  color: var(--col-text1);
 }
 
 .select-wrap {
@@ -84,6 +85,7 @@ body {
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
+  color: var(--col-text1);
 }
 
 .empty-select {
@@ -202,7 +204,8 @@ body {
 .customer-input {
   height: var(--height-input);
   width: 70%;
-  padding: 5px;
+  padding: 15px;
+  color: var(--col-text1);
 }
 
 .customer-input-sm {
@@ -210,6 +213,23 @@ body {
   width: 40%;
   padding: 5px;
 }
+/* ボタン =========================  */
+#btn-wrap {
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+}
+
+.btn-csv-dl,.btn-print {
+  border: none;
+  background-color: #DC8671;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-top: 10px;
+ }
+
+
 /* 印刷時以外非表示の項目 =========================  */
 #company-info {
 visibility: hidden;
