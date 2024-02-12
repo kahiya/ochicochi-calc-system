@@ -1,20 +1,45 @@
 /*menu =========================  */
-.menu {
+.menu-wrap {
     display: flex;
-    justify-content: space-between;
+    justify-content:center;
+    gap: 30px;
     align-items: center;
-    background-color: #4e8fb1;
+    background-color: #ffffff;
     color: #fff;
+    padding: 30px;
   }
   
   .menu-item {
-    padding: 30px 20px;
+    padding: 15px 40px;
     font-size: 16px;
     letter-spacing: 0.1rem;
-    flex-grow: 1;
+    /* flex-grow: 1; */
     text-decoration: none;
     color: #fff;
     text-align: center;
     border-right: 1px solid #fff;
+    border-radius: 40px;
+    width: 170px;
+    box-shadow: 0 5px 5px rgba(60, 55, 75, 0.3); ;
+    transition: transform .2s;
   }
-  
+
+.top-menu-item:hover {
+    transform: scale(.95);
+}
+
+.top-menu-item:active {
+    transform: scale(.95);
+}
+
+.shitate {
+    background-color: var(--col-pink1);
+}
+
+.kakou {
+    background-color: var(--col-green1);
+}
+
+.obi {
+    background-color: var(--col-yel1);
+}

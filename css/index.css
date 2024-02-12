@@ -17,7 +17,7 @@
 .main-title {
     padding: 50px;
     margin: auto;
-    color: #6a6863;
+    color: var(--col-text1);
     text-align: center;
 }
 

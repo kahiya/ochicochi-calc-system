@@ -11,14 +11,16 @@
 <link rel="stylesheet" href="css/print.css">
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/color.css">
   </head>
   <body>
     <div class="main-wrap">
-      <div class="menu">
-        <a href="shitate-kimono.html" class="menu-item">御仕立て見積もり</a>
-        <a href="kakou.html" class="menu-item">加工見積もり</a>
+      <div class="menu-wrap">
+        <a href="shitate-kimono.html" class="menu-item shitate">御仕立て</a>
+        <a href="kakou.html" class="menu-item kakou">加工</a>
+        <a href="帯.html" class="menu-item obi">帯</a>
     </div>
-
+    <div class="form-wrap">
       <h1 class="title">御仕立て見積</h1>
       <form id="estimate-form">
 
@@ -92,6 +94,8 @@
       <button id="download-csv">CSVダウンロード</button>
       <button id="print">印刷</button>
     </form>
+      
+  </div>
     <div id="company-info" class="company-info">
       <p class="company-name"><img class="company-logo" /><span>彼方此方屋</span></p>
       <p class="date-printed">発行日：<span id="printed-date"></span></p>
