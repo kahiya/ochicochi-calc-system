@@ -63,8 +63,8 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 15px 15px 0 15px;
-  border-color: #E88579 transparent transparent transparent;
+  border-width: 12px 12px 0 12px;
+  border-color: #ccc transparent transparent transparent;
   position: absolute;
   top: 50%;
   right: 15px;
@@ -139,8 +139,8 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 15px 15px 0 15px;
-  border-color: #E88579
+  border-width: 12px 12px 0 12px;
+  border-color: #ccc
   transparent transparent transparent;
   position: absolute;
   top: 60%;
