@@ -1,6 +1,6 @@
 /* 変数 =========================  */
 :root {
-  --height-input: 28px;
+  --height-input: 70px;
 }
 
 /*body =========================  */
@@ -10,16 +10,11 @@ body {
 }
 /* サイズ =========================  */
 .main-wrap {
-  max-width: 768px;
   margin: 0 auto;
 }
 
 #estimate-form {
-  padding: 50px;
-}
-
-#estimate-form > * + * {
-  margin-top: 15px;
+  padding: 80px;
 }
 
 /* main-wrapの中身 =========================  */
@@ -31,10 +26,9 @@ body {
 
 .title {
   text-align: center;
-  font-size: 30px;
+  font-size: var(--header-font-size);
   font-weight: bold;
-  margin-bottom: 30px;
-  padding-top: 50px;
+  padding-top: 80px;
   letter-spacing: 0.3px;
   color: var(--col-text1);
 }
@@ -44,21 +38,21 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: 44px;
 }
 
 .form-label {
   display: inline-block;
-  font-size: 16px;
+  font-size: var(--label-font-size);
   font-weight: bold;
   margin-bottom: 5px;
-  letter-spacing: 0.1rem;
-  width: 150px;
+  letter-spacing: 0.2rem;
+  width: 250px;
   color: var(--col-text1);
 }
 
 .select-wrap {
   width: auto;
-  max-width: 300px;
   position: relative;
 }
 
@@ -67,24 +61,34 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 8px 8px 0 8px;
-  border-color: #4e8fb1 transparent transparent transparent;
+  border-width: 12px 12px 0 12px;
+  border-color: #ccc transparent transparent transparent;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 15px;
   transform: translateY(-50%);
   pointer-events: none;
 }
 
-.form-select,.form-input,.select-preprocessing,.select-accessory {
-  padding: 10px;
+.form-select,.select-preprocessing,.select-accessory {
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 250px;
-  padding: 10px 40px 10px 10px;
+  padding: 10px 50px 10px 30px;
   -webkit-appearance: none;
-  appearance: none; 
+  appearance: none;
+  background-color: #fff;
+  color: var(--col-text1);
+  font-size: var(--input-font-size);
+  letter-spacing: 0.2rem;
+}
+
+.form-select {
+  max-width: 500px;
+}
+
+.select-preprocessing,.select-accessory {
+  max-width: 400px;
 }
 
 .empty-select {
@@ -105,21 +109,20 @@ body {
   border: none;
   background-color: #4e8fb1;
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-size: 14px;
+  padding: 15px 30px;
+  border-radius: 40px;
+  font-size: var(--btn-font-size);
   letter-spacing: 0.1rem;
 }
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
-  margin-left: 150px;
-  margin-top: 10px;
+  margin-left: 250px;
+  margin-top: 20px;
 }
 
 #accessory-container {
   display: flex;
-  width: 100%;
 }
 
 #accessory-container > div > select {
@@ -139,37 +142,40 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 8px 8px 0 8px;
-  border-color: #4e8fb1
+  border-width: 12px 12px 0 12px;
+  border-color: #ccc
   transparent transparent transparent;
   position: absolute;
   top: 60%;
-  right: 28%;
+  right: 23%;
   transform: translateY(-50%);
   pointer-events: none;
 }
 
- .btn-delete {
+.btn-delete {
   border: none;
   background-color: #4e8fb1;
   color: #fff;
-  padding: 10px;
-  border-radius: 4px;
+  padding: 10px 30px;
+  border-radius: 10px;
   margin-top: 10px;
+  font-size: var(--btn-font-size);
  }
 
 
-.estimate-result {
+
+ .estimate-result {
   justify-content: space-between;
   align-items: center;
   margin: 50px auto;
-  padding: 40px;
+  padding: 70px 50px;
   background-color: #fff;
   border-radius: 8px;
+  color: var(--col-text1);  
 }
 
 .result-header {
-  font-size: 18px;
+  font-size: var(--header-font-size);
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
@@ -178,30 +184,33 @@ body {
 .estimate {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
+  font-size: var(--estimate-font-size);
 }
 
+
 .exempt {
-  font-size: 12px;
+  font-size: 22px;
 }
+
 
 /* 見積もり表示部分 =========================  */
 
 .total {
-  font-size: 18px;
+  font-size: var(--total-font-size);
   font-weight: 700;
   border-top: 1px dotted #000;
   text-align: center;
   width: 100%;
   padding-top: 10px;
-  margin-bottom: 40px;
 }
+
 
 /* お客様情報 =========================  */
 .customer-header {
-  font-size: 18px;
+  font-size: var(--header-font-size);
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
@@ -210,9 +219,10 @@ body {
 
 .customer-input {
   height: var(--height-input);
-  width: 70%;
+  width: 60%;
   padding: 15px;
   color: var(--col-text1);
+  font-size: var(--input-font-size);
 }
 
 .customer-input-sm {
@@ -221,6 +231,14 @@ body {
   padding: 5px;
 }
 
+.customer-textarea {
+  height: 200px;
+  width: 60%;
+  padding: 15px;
+  color: var(--col-text1);
+  font-size: var(--input-font-size);
+  border-radius: 4px;
+}
 /* ボタン =========================  */
 #btn-wrap {
   margin-top: 30px;
@@ -232,9 +250,10 @@ body {
   border: none;
   background-color: var(--col-blue1);
   color: #fff;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 15px 30px;
+  border-radius: 10px;
   margin-top: 10px;
+  font-size: var(--btn-font-size);
  }
 
 /* 印刷時以外非表示の項目 =========================  */
