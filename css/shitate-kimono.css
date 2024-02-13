@@ -14,7 +14,7 @@ body {
 }
 
 #estimate-form {
-  padding: 80px;
+  padding: 50px;
 }
 
 
@@ -47,7 +47,7 @@ body {
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.2rem;
-  width: 250px;
+  width: 130px;
   color: var(--col-text1);
 }
 
@@ -100,7 +100,6 @@ body {
 }
 
 #add-preprocessing,#add-accessory {
-  margin-right: 300px;
   border: none;
   background-color: #DC8671;
   color: #fff;
@@ -112,7 +111,7 @@ body {
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
-  margin-left: 250px;
+  margin-left: 130px;
   margin-top: 20px;
 }
 
@@ -151,10 +150,11 @@ body {
   border: none;
   background-color: #DC8671;
   color: #fff;
-  padding: 10px 30px;
-  border-radius: 10px;
-  margin-top: 10px;
+  padding: 5px 20px;
+  border-radius: 8px;
+  margin-top: 20px;
   font-size: var(--btn-font-size);
+  width: 120px;
  }
 
 
@@ -178,14 +178,14 @@ body {
 .estimate {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px;
   align-items: center;
   margin-bottom: 80px;
   font-size: var(--estimate-font-size);
 }
 
 .exempt {
-  font-size: 22px;
+  font-size: 14px;
 }
 
 /* 見積もり表示部分 =========================  */
@@ -210,7 +210,7 @@ body {
 
 .customer-input {
   height: var(--height-input);
-  width: 60%;
+  width: 70%;
   padding: 15px;
   color: var(--col-text1);
   font-size: var(--input-font-size);
@@ -224,7 +224,7 @@ body {
 
 .customer-textarea {
   height: 200px;
-  width: 60%;
+  width: 70%;
   padding: 15px;
   color: var(--col-text1);
   font-size: var(--input-font-size);

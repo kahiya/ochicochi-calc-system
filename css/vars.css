@@ -8,11 +8,11 @@
     --col-blue1: #4ea9b1;
 
 /* font-size */
-    --header-font-size: 36px;
+    --header-font-size: 26px;
     --header-font-weight: 700;
-    --label-font-size: 22px;
-    --input-font-size: 28px;
-    --estimate-font-size: 28px;
-    --btn-font-size: 24px;
-    --total-font-size: 34px;
+    --label-font-size: 18px;
+    --input-font-size: 18px;
+    --estimate-font-size: 18px;
+    --btn-font-size: 16px;
+    --total-font-size: 32px;
 }

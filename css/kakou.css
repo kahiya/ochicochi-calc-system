@@ -43,11 +43,11 @@ body {
 
 .form-label {
   display: inline-block;
-  font-size: 28px;
+  font-size: var(--label-font-size);
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.2rem;
-  width: 250px;
+  width: 150px;
   color: var(--col-text1);
 }
 
