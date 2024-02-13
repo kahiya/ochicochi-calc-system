@@ -26,10 +26,9 @@ body {
 
 .title {
   text-align: center;
-  font-size: 30px;
+  font-size: var(--header-font-size);
   font-weight: bold;
-  margin-bottom: 30px;
-  padding-top: 50px;
+  padding-top: 80px;
   letter-spacing: 0.3px;
   color: var(--col-text1);
 }
@@ -115,7 +114,7 @@ body {
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
   margin-left: 250px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #accessory-container {
@@ -180,9 +179,9 @@ body {
 .estimate {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 80px;
   font-size: var(--estimate-font-size);
 }
 
@@ -193,7 +192,7 @@ body {
 /* 見積もり表示部分 =========================  */
 
 .total {
-  font-size: var(--header-font-size);
+  font-size: var(--total-font-size);
   font-weight: 700;
   border-top: 1px dotted #000;
   text-align: center;
@@ -222,6 +221,15 @@ body {
   height: var(--height-input);
   width: 40%;
   padding: 5px;
+}
+
+.customer-textarea {
+  height: 200px;
+  width: 60%;
+  padding: 15px;
+  color: var(--col-text1);
+  font-size: var(--input-font-size);
+  border-radius: 4px;
 }
 /* ボタン =========================  */
 #btn-wrap {
