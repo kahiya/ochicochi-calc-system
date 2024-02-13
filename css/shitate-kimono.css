@@ -1,6 +1,6 @@
 /* 変数 =========================  */
 :root {
-  --height-input: 32px;
+  --height-input: 46px;
 }
 
 /*body =========================  */
@@ -44,11 +44,11 @@ body {
 
 .form-label {
   display: inline-block;
-  font-size: 22px;
+  font-size: 36px;
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.1rem;
-  width: 190px;
+  width: 250px;
   color: var(--col-text1);
 }
 
