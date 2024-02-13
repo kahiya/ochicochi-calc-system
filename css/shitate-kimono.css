@@ -39,7 +39,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 .form-label {
@@ -63,7 +63,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 8px 8px 0 8px;
+  border-width: 15px 15px 0 15px;
   border-color: #E88579 transparent transparent transparent;
   position: absolute;
   top: 50%;
@@ -76,13 +76,20 @@ body {
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 300px;
-  padding: 10px 40px 10px 20px;
+  padding: 10px 50px 10px 20px;
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   color: var(--col-text1);
-  font-size: 20px;
+  font-size: 32px;
+}
+
+.form-select {
+  max-width: 500px;
+}
+
+.select-preprocessing,.select-accessory {
+  max-width: 400px;
 }
 
 .empty-select {
@@ -100,13 +107,13 @@ body {
   color: #fff;
   padding: 10px 20px;
   border-radius: 25px;
-  font-size: 14px;
+  font-size: 22px;
   letter-spacing: 0.1rem;
 }
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
-  margin-left: 150px;
+  margin-left: 250px;
   margin-top: 10px;
 }
 
@@ -121,7 +128,7 @@ body {
 }
 
 .add-select-wrap {
-  width: 80%;
+  width: 100%;
   display: flex;
   position: relative;
 }
@@ -131,12 +138,12 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 8px 8px 0 8px;
+  border-width: 15px 15px 0 15px;
   border-color: #E88579
   transparent transparent transparent;
   position: absolute;
   top: 60%;
-  right: 42%;
+  right: 28%;
   transform: translateY(-50%);
   pointer-events: none;
 }
