@@ -10,7 +10,6 @@ body {
 }
 /* サイズ =========================  */
 .main-wrap {
-  max-width: 768px;
   margin: 0 auto;
 }
 
@@ -18,9 +17,6 @@ body {
   padding: 50px;
 }
 
-#estimate-form > * + * {
-  margin-top: 15px;
-}
 
 /* form-wrapの中身 =========================  */
 .form-wrap {
@@ -43,21 +39,22 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
 .form-label {
   display: inline-block;
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.1rem;
-  width: 150px;
+  width: 190px;
   color: var(--col-text1);
 }
 
 .select-wrap {
   width: auto;
-  max-width: 300px;
+  /* max-width: 300px; */
   position: relative;
 }
 
@@ -70,22 +67,22 @@ body {
   border-color: #E88579 transparent transparent transparent;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 15px;
   transform: translateY(-50%);
   pointer-events: none;
 }
 
 .form-select,.select-preprocessing,.select-accessory {
-  padding: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
   width: 100%;
-  max-width: 250px;
-  padding: 10px 40px 10px 10px;
+  max-width: 300px;
+  padding: 10px 40px 10px 20px;
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
   color: var(--col-text1);
+  font-size: 20px;
 }
 
 .empty-select {
@@ -139,7 +136,7 @@ body {
   transparent transparent transparent;
   position: absolute;
   top: 60%;
-  right: 28%;
+  right: 42%;
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -164,7 +161,7 @@ body {
 }
 
 .result-header {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
@@ -185,7 +182,7 @@ body {
 /* 見積もり表示部分 =========================  */
 
 .total {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: 700;
   border-top: 1px dotted #000;
   text-align: center;
@@ -195,10 +192,11 @@ body {
 
 /* お客様情報 =========================  */
 .customer-header {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   text-align: center;
   margin-bottom: 30px;
+  color: var(--col-text1);
 }
 
 .customer-input {
@@ -206,6 +204,7 @@ body {
   width: 70%;
   padding: 15px;
   color: var(--col-text1);
+  font-size: 20px;
 }
 
 .customer-input-sm {

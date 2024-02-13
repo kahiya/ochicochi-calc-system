@@ -20,7 +20,7 @@ function calculateCost() {
     const costElement = document.getElementById('totalCost');
 
     // 商品選択に基づく内訳表示
-    detailsElement.innerHTML = `<p>商品: ${product} - ¥${productCost.toLocaleString()}</p>`;
+    detailsElement.innerHTML = `<p>商品: ${product} ¥${productCost.toLocaleString()}</p>`;
 
     // 付属品の価格表示
     const accessorySelects = document.querySelectorAll('.select-accessory');
