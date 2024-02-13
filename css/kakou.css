@@ -43,7 +43,7 @@ body {
 
 .form-label {
   display: inline-block;
-  font-size: var(--label-font-size);
+  font-size: 28px;
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.2rem;
