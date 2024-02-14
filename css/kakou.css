@@ -110,6 +110,7 @@ body {
 
 #preprocessing-container {
   display: flex;
+  flex-direction: column;  
 }
 
 #add-preprocessing,#add-accessory {
@@ -133,6 +134,7 @@ body {
 
 #accessory-container {
   display: flex;
+  flex-direction: column;  
 }
 
 #accessory-container > div > select {
