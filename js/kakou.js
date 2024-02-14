@@ -261,3 +261,4 @@ document.getElementById('other-fee').addEventListener('input', calculateCost);
 // 最初にページが読み込まれたときの実行
 updateServices();
 calculateCost(); // 初期状態での計算も行います
+x

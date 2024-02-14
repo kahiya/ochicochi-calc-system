@@ -67,8 +67,18 @@ function addAccessoryOption() {
     // 削除ボタン作成
     const deleteButton = document.createElement('button');
     deleteButton.type = 'button';
-    deleteButton.textContent = '削除';
     deleteButton.className = 'btn-delete';
+
+    // 削除ボタンにIMG要素を追加
+    const deleteIcon = document.createElement('img');
+    deleteIcon.src = 'images/SVG/icon-delete.svg'; // アイコンのパスを指定
+    deleteIcon.className = 'icon-delete'; // 必要に応じてCSSクラスを指定
+    deleteIcon.alt = '削除';
+
+    // 削除ボタンにテキスト "削除" を追加（画像の後）
+    deleteButton.appendChild(deleteIcon);
+    deleteButton.appendChild(document.createTextNode(" 削除"));
+
     deleteButton.addEventListener('click', function() {
         accessoryWrapper.remove();
         calculateCost(); // 再計算
@@ -79,7 +89,6 @@ function addAccessoryOption() {
     accessoryWrapper.appendChild(deleteButton);
     accessoryContainer.appendChild(accessoryWrapper);
 }
-
 
 
 // 商品の価格データ
@@ -110,3 +119,6 @@ const accessoriesPrices = {
     '帯芯・綿（薄手タイプ）': 990,
     '帯芯・綿（厚手タイプ）': 1320,
 };
+
+
+console.log('shitate-obi.js loaded');
