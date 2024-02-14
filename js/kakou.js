@@ -157,7 +157,17 @@ document.getElementById('add-accessory').addEventListener('click', function() {
 
     // 削除ボタンを作成し、クラスを追加
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = '削除';
+
+    // アイコン要素（img）の作成
+    const iconDelete = document.createElement('img');
+    // アイコン画像のパスを設定
+    iconDelete.src = 'images/SVG/icon-delete.svg';
+    // アイコンにクラスを追加（スタイリング用）
+    iconDelete.classList.add("icon-delete");
+
+    // ボタンにアイコン要素（img）とテキスト「削除」を追加
+    deleteButton.appendChild(iconDelete);
+    deleteButton.appendChild(document.createTextNode(' 削除')); // アイコンの隣にテキストを追加
     deleteButton.type = 'button';
     deleteButton.classList.add("btn-delete"); // クラスの追加
 
@@ -169,7 +179,6 @@ document.getElementById('add-accessory').addEventListener('click', function() {
     accessoryWrapper.appendChild(deleteButton);
     accessoryContainer.appendChild(accessoryWrapper);
 });
-
 
 function calculateCost() {
     const product = document.getElementById('product').value;
