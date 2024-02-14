@@ -38,7 +38,7 @@
     }
 
     #estimate-result {
-      margin-top: 200px;
+      margin-top: 260px;
       padding: 50px 40px;
       width: 95%;
     }
@@ -51,7 +51,7 @@
     #company-info {
       display: flex;
       flex-direction: column;
-      width: 95vw;
+      width: 90vw;
     }
 
     #company-info > * + * {
