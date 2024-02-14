@@ -1,6 +1,6 @@
 /* 変数 =========================  */
 :root {
-  --height-input: 70px;
+  --height-input: 49px;
 }
 
 /*body =========================  */
@@ -47,7 +47,7 @@ body {
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.2rem;
-  width: 130px;
+  width: 110px;
   color: var(--col-text1);
 }
 
@@ -211,15 +211,17 @@ body {
 .customer-input {
   height: var(--height-input);
   width: 70%;
-  padding: 15px;
+  padding: 10px;
   color: var(--col-text1);
   font-size: var(--input-font-size);
+  border: 1px solid #ccc;
 }
 
 .customer-input-sm {
   height: var(--height-input);
   width: 40%;
   padding: 5px;
+  border: 1px solid #ccc;
 }
 
 .customer-textarea {
@@ -229,6 +231,7 @@ body {
   color: var(--col-text1);
   font-size: var(--input-font-size);
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
 /* ボタン =========================  */
 #btn-wrap {

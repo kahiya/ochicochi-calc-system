@@ -1,6 +1,6 @@
 /* 変数 =========================  */
 :root {
-  --height-input: 70px;
+  --height-input: 49px;
 }
 
 /*body =========================  */
@@ -14,7 +14,7 @@ body {
 }
 
 #estimate-form {
-  padding: 80px;
+  padding: 50px;
 }
 
 /* main-wrapの中身 =========================  */
@@ -47,7 +47,7 @@ body {
   font-weight: bold;
   margin-bottom: 5px;
   letter-spacing: 0.2rem;
-  width: 150px;
+  width: 110px;
   color: var(--col-text1);
 }
 
@@ -61,7 +61,7 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 12px 12px 0 12px;
+  border-width: 10px 10px 0 10px;
   border-color: #ccc transparent transparent transparent;
   position: absolute;
   top: 50%;
@@ -87,6 +87,15 @@ body {
   max-width: 500px;
 }
 
+.form-input {
+  height: var(--height-input);
+  padding: 10px 50px 10px 30px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: var(--input-font-size);
+  color: var(--col-text1);
+}
+
 .select-preprocessing,.select-accessory {
   max-width: 400px;
 }
@@ -105,7 +114,6 @@ body {
 }
 
 #add-preprocessing,#add-accessory {
-  margin-right: 300px;
   border: none;
   background-color: #4e8fb1;
   color: #fff;
@@ -117,7 +125,7 @@ body {
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
-  margin-left: 250px;
+  margin-left: 110px;
   margin-top: 20px;
 }
 
@@ -142,12 +150,12 @@ body {
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 12px 12px 0 12px;
+  border-width: 10px 10px 0 10px;
   border-color: #ccc
   transparent transparent transparent;
   position: absolute;
-  top: 60%;
-  right: 23%;
+  top: 65%;
+  right: 8%;
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -184,15 +192,15 @@ body {
 .estimate {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 30px;
+  margin-bottom: 30px;
   align-items: center;
-  margin-bottom: 80px;
   font-size: var(--estimate-font-size);
 }
 
 
 .exempt {
-  font-size: 22px;
+  font-size: 14px;
 }
 
 
@@ -205,6 +213,7 @@ body {
   text-align: center;
   width: 100%;
   padding-top: 10px;
+  margin-bottom: 80px;
 }
 
 
@@ -219,26 +228,31 @@ body {
 
 .customer-input {
   height: var(--height-input);
-  width: 60%;
-  padding: 15px;
+  width: 70%;
+  padding: 10px;
   color: var(--col-text1);
   font-size: var(--input-font-size);
+  border: 1px solid #ccc;
 }
 
 .customer-input-sm {
   height: var(--height-input);
   width: 40%;
   padding: 5px;
+  border: 1px solid #ccc;
 }
 
 .customer-textarea {
   height: 200px;
-  width: 60%;
+  width: 70%;
   padding: 15px;
   color: var(--col-text1);
   font-size: var(--input-font-size);
   border-radius: 4px;
+  border: 1px solid #ccc;
 }
+
+
 /* ボタン =========================  */
 #btn-wrap {
   margin-top: 30px;
