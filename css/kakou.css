@@ -15,6 +15,8 @@ body {
 
 #estimate-form {
   padding: 50px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* main-wrapの中身 =========================  */
@@ -270,7 +272,7 @@ body {
 
 .btn-csv-dl,.btn-print {
   border: none;
-  background-color: var(--col-blue1);
+  background-color: var(--col-violet1);
   color: #fff;
   padding: 15px 30px;
   border-radius: 10px;
