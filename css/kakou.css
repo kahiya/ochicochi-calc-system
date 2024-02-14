@@ -170,7 +170,7 @@ body {
 
 .btn-delete {
   border: none;
-  background-color: #4e8fb1;
+  background-color: var(--col-violet1);
   color: #fff;
   padding: 5px 20px;
   border-radius: 8px;
