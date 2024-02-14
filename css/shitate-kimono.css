@@ -107,7 +107,11 @@ body {
   border-radius: 40px;
   font-size: var(--btn-font-size);
   letter-spacing: 0.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
@@ -248,6 +252,9 @@ body {
   border-radius: 10px;
   margin-top: 10px;
   font-size: var(--btn-font-size);
+  display: flex;
+  align-items: center;
+  gap: 10px;
  }
 
 
@@ -262,4 +269,14 @@ padding: 0;
   background-color: #aaa;
   width: 100px;
   height: 100px;
+}
+
+.icon-plus {
+  width: 15px;
+  height: 15px;
+}
+
+.icon-dl,.icon-print {
+  width: 20px;
+  height: 20px;
 }

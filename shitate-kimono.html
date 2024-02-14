@@ -44,14 +44,18 @@
         <div class="form-field" id="preprocessing-container">
           <label for="preprocessing" class="form-label">前処理：</label>
           <select id="preprocessing" class="form-select empty-select" ></select>
-          <button type="button" id="add-preprocessing">前処理を追加</button>
+          <button type="button" id="add-preprocessing">
+            <img src="images/SVG/icon-plus.svg" class="icon-plus" alt="">
+            前処理を追加</button>
         </div>
-  
+
       <!-- 付属品を追加するコンテナとボタン -->
         <div class="form-field" id="accessory-container">
           <label class="form-label">付属品：</label>
           <!-- JavaScriptによって初期の付属品セレクトボックスがここに作成されます -->
-          <button type="button" id="add-accessory">付属品を追加</button>
+          <button type="button" id="add-accessory">
+            <img src="images/SVG/icon-plus.svg" class="icon-plus" alt="">
+            付属品を追加</button>
         </div>
         <div id="estimate-result" class="estimate-result">
           <p class="result-header">見積もり結果</p>
@@ -92,8 +96,14 @@
         <textarea type="text" id="address" name="address" class="customer-textarea" rows="3" required></textarea>
       </div>
       <div id="btn-wrap">
-        <button id="download-csv" class="btn-csv-dl">CSVダウンロード</button>
-        <button id="print" class="btn-print">印刷</button>
+        <button id="download-csv" class="btn-csv-dl">
+          CSVダウンロード
+        <img src="images/SVG/icon-dl.svg" class="icon-dl" alt="">
+        </button>
+        <button id="print" class="btn-print">
+          印刷
+        <img src="images/SVG/icon-print.svg" class="icon-print" alt="">
+        </button>
       </div>
     </form>
 
