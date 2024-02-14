@@ -11,10 +11,11 @@ body {
 /* サイズ =========================  */
 .main-wrap {
   margin: 0 auto;
+  height: 100vh;
 }
 
 #estimate-form {
-  padding: 50px;
+  padding: 50px 50px 300px 50px;
   max-width: 800px;
   margin: 0 auto;
 }
