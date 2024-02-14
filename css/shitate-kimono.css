@@ -115,7 +115,7 @@ body {
 
 .select-preprocessing,.select-accessory {
   margin-right: 10px;
-  margin-left: 130px;
+  margin-left: 110px;
   margin-top: 20px;
 }
 
@@ -144,8 +144,8 @@ body {
   border-color: #ccc
   transparent transparent transparent;
   position: absolute;
-  top: 60%;
-  right: 23%;
+  top: 65%;
+  right: 36%;
   transform: translateY(-50%);
   pointer-events: none;
 }
