@@ -16,42 +16,30 @@
 </head>
 <body>
     <div id="app" class="main-wrap">
-      <div class="menu-wrap">
-        <a href="shitate-kimono.html" class="menu-item shitate">着物仕立て</a>
-        <a href="shitate-obi.html" class="menu-item obi">帯仕立て</a>
-        <a href="kakou.html" class="menu-item kakou">加工</a>
-        <a href="arai.html" class="menu-item arai">洗い</a>
-      </div>
-        <div class="form-wrap">
-        <h2 class="title">帯仕立て見積もりシステム</h2>
+        <div class="menu-wrap">
+            <a href="shitate-kimono.html" class="menu-item shitate">着物仕立て</a>
+            <a href="shitate-obi.html" class="menu-item obi">帯仕立て</a>
+            <a href="kakou.html" class="menu-item kakou">加工</a>
+            <a href="arai.html" class="menu-item arai">洗い</a>
+        </div>
+            <div class="form-wrap">
+        <h2 class="title">洗い見積もりシステム</h2>
         <form id="estimate-form">
         <div class="form-field">
             <label for="product" class="form-label">商品:</label>
             <div class="select-wrap">
                 <select id="product" name="product" class="form-select">
-                    <option value="袋帯 本仕立て（芯別）">袋帯 本仕立て（芯別）</option>
-                    <option value="袋帯 芯取り替え（芯別）">袋帯 芯取り替え（芯別）</option>
-                    <option value="九寸名古屋帯 本仕立て（芯別）">九寸名古屋帯 本仕立て（芯別）</option>
-                    <option value="九寸名古屋帯 平仕立">九寸名古屋帯 平仕立</option>
-                    <option value="九寸名古屋帯 芯取り替え（芯別）">九寸名古屋帯 芯取り替え（芯別）</option>
-                    <option value="八寸名古屋帯 松葉仕立て">八寸名古屋帯 松葉仕立て</option>
-                    <option value="八寸名古屋帯 総かがり">八寸名古屋帯 総かがり</option>
-                    <option value="半幅帯 角帯">半幅帯 角帯</option>
-                    <option value="作り帯（切らないタイプ）">作り帯（切らないタイプ）</option>
-                    <option value="作り帯（切るタイプ）">作り帯（切るタイプ）</option>
-                    <option value="シワ・折りくせたたみ直し">シワ・折りくせたたみ直し</option>
+                    <option value="丸洗い">丸洗い</option>
+                    <option value="帯の丸洗い">帯の丸洗い</option>
+                    <option value="汗取り（全体）">汗取り（全体）</option>
+                    <option value="汗取り（部分）">汗取り（部分）</option>
+                    <option value="汗取り（特殊なもの）">汗取り（特殊なもの）</option>
+                    <option value="さらさらドライ">さらさらドライ</option>
                 </select>
             </div>
         </div>
 
-        <div class="form-field">
-            <label for="accessories" class="form-label">付属品:</label>
-            <button type="button" id="add-accessory">
-              <img src="images/SVG/icon-plus.svg" class="icon-plus" alt="">
-              付属品を追加する</button>
-              </button>
-            <div id="accessory-container"></div> <!-- 動的に付属品選択肢を追加するコンテナ -->
-        </div>
+
         <div id="estimate-result" class="estimate-result">
             <p class="result-header">見積もり結果</p>
             <div id="details" class="estimate"></div> <!-- 内訳を表示するためのセクション -->
@@ -105,7 +93,7 @@
             <p class="company-tel">電話番号：075-344-4566</p>
           </div>
         </div>
-    <script src="js/shitate-obi.js"></script>
+    <script src="js/arai.js"></script>
     <script src="js/csv-download.js"></script>
     <script src="js/print.js"></script>
 </body>
