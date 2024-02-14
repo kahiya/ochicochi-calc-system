@@ -21,7 +21,7 @@
   
   /* main-wrapの中身 =========================  */
   .form-wrap {
-    background-color: #d3dde0;
+    background-color: #efeddd;
     
   }
   
@@ -270,7 +270,7 @@
   
   .btn-csv-dl,.btn-print {
     border: none;
-    background-color: var(--col-blue1);
+    background-color: var(--col-yel1);
     color: #fff;
     padding: 15px 30px;
     border-radius: 10px;

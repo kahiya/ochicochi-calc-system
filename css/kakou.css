@@ -21,7 +21,7 @@ body {
 
 /* main-wrapの中身 =========================  */
 .form-wrap {
-  background-color: #d3dde0;
+  background-color: #e7e0ed;
   
 }
 
@@ -117,7 +117,7 @@ body {
 
 #add-preprocessing,#add-accessory {
   border: none;
-  background-color: #4e8fb1;
+  background-color : var(--col-violet1);
   color: #fff;
   padding: 15px 30px;
   border-radius: 40px;
