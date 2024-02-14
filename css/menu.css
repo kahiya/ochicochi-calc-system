@@ -19,9 +19,9 @@
     text-align: center;
     border-right: 1px solid #fff;
     border-radius: 40px;
-    width: 170px;
-    box-shadow: 0 5px 5px rgba(60, 55, 75, 0.3); ;
+    width: auto;
     transition: transform .2s;
+    font-weight: 700;
   }
 
 .top-menu-item:hover {
@@ -34,6 +34,10 @@
 
 .shitate {
     background-color: var(--col-pink1);
+}
+
+.obi {
+    background-color: var(--col-blue1);
 }
 
 .kakou {
