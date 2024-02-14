@@ -46,12 +46,13 @@
     #company-info, #company-info * {
       visibility: visible;
       height: auto;
+
     }
     #company-info {
       display: flex;
       flex-direction: column;
       padding: 0 100px;
-      width: 95px;
+      width: 95vw;
     }
 
     #company-info > * + * {
