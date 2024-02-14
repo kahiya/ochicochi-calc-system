@@ -48,21 +48,16 @@
             <select id="service" name="service" class="form-select"></select>
         </div>
     </div>
-    <div class="form-field">
-        <label for="preprocessing" class="form-label">前処理:</label>
-        <button type="button" id="add-preprocessing">
-            <img src="images/SVG/icon-plus.svg" class="icon-plus" alt="">
-            前処理を追加する</button>
-        <div class="add-select-wrap">
-            <select id="preprocessing" name="preprocessing" class="select-preprocessing">
-                <option value="なし">なし</option>
-                <option value="湯のし">湯のし</option>
-                <option value="筋消し">筋消し</option>
-            </select>
-        </div>
-        <!-- 既存の前処理選択肢の直下に配置 -->
-<div id="preprocessing-container" class="form-field"></div> <!-- 動的に前処理選択肢を追加するコンテナ -->
-    </div>
+
+<!-- このセクションの初期状態では前処理セレクタを表示しない -->
+<div class="form-field">
+    <label for="preprocessing" class="form-label">前処理:</label>
+    <button type="button" id="add-preprocessing">
+        <img src="images/SVG/icon-plus.svg" class="icon-plus" alt="">
+        前処理を追加する
+    </button>
+    <div id="preprocessing-container"></div> <!-- 動的に前処理選択肢を追加するコンテナ -->
+</div>
 
     <div class="form-field">
         <label for="accessories" class="form-label">付属品:</label>

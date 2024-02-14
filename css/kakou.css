@@ -110,7 +110,6 @@ body {
 
 #preprocessing-container {
   display: flex;
-  width: 100%;
 }
 
 #add-preprocessing,#add-accessory {
@@ -157,8 +156,8 @@ body {
   border-color: #ccc
   transparent transparent transparent;
   position: absolute;
-  top: 65%;
-  right: 22%;
+  top: 66%;
+  right: 25%;
   transform: translateY(-50%);
   pointer-events: none;
 }

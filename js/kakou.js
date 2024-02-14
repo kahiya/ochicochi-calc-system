@@ -98,7 +98,7 @@ function updateServices() {
 }
 
 // 以前定義されたイベントリスナーに加え、前処理が変わった場合も処理を実行
-document.getElementById('preprocessing').addEventListener('change', calculateCost);
+// document.getElementById('preprocessing').addEventListener('change', calculateCost);
 // calculateCost 関数を更新して、前処理のコストも含める
 
 
@@ -109,23 +109,31 @@ document.getElementById('add-preprocessing').addEventListener('click', function(
 
     const newSelect = document.createElement('select');
     newSelect.classList.add("select-preprocessing");
-
+    newSelect.name = 'preprocessing[]';
     newSelect.innerHTML = `
         <option value="なし">なし</option>
         <option value="湯のし">湯のし</option>
         <option value="筋消し">筋消し</option>
     `;
-    newSelect.name = 'preprocessing[]';
     newSelect.addEventListener('change', calculateCost);
 
     preprocessingWrapper.appendChild(newSelect);
 
-    // 削除ボタンを作成し、クラスを追加
+    // 削除ボタンを作成
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = '削除';
     deleteButton.type = 'button';
-    deleteButton.classList.add("btn-delete"); // クラスの追加
+    deleteButton.classList.add("btn-delete");
 
+    // アイコン（img要素）を作成
+    const iconDelete = document.createElement('img');
+    iconDelete.src = 'images/SVG/icon-delete.svg'; // アイコン画像のパス
+    iconDelete.classList.add("icon-delete");
+    deleteButton.appendChild(iconDelete);
+
+    // 「削除」というテキストを追加
+    deleteButton.appendChild(document.createTextNode(' 削除')); // アイコンの後にテキストを追加
+
+    // 削除ボタンのクリックイベント
     deleteButton.addEventListener('click', function() {
         preprocessingWrapper.remove();
         calculateCost();
@@ -134,7 +142,6 @@ document.getElementById('add-preprocessing').addEventListener('click', function(
     preprocessingWrapper.appendChild(deleteButton);
     preprocessingContainer.appendChild(preprocessingWrapper);
 });
-
 
 document.getElementById('add-accessory').addEventListener('click', function() {
     const accessoryContainer = document.getElementById('accessory-container');
@@ -180,16 +187,27 @@ document.getElementById('add-accessory').addEventListener('click', function() {
     accessoryContainer.appendChild(accessoryWrapper);
 });
 
+// 動的に追加された全ての前処理セレクタの合計コストを計算
+function calculateTotalPreprocessingCost() {
+    let totalCost = 0;
+    // querySelectorAll を使用して、name属性が 'preprocessing[]' の全セレクタを取得
+    const preprocessingSelectors = document.querySelectorAll('[name="preprocessing[]"]');
+    preprocessingSelectors.forEach(selector => {
+        totalCost += preprocessingPrices[selector.value] || 0;
+    });
+
+    return totalCost;
+}
+
 function calculateCost() {
     const product = document.getElementById('product').value;
     const location = document.getElementById('location').value;
     const service = document.getElementById('service').value;
-    const preprocessing = document.getElementById('preprocessing').value;
     const detailsElement = document.getElementById('details');
     const costElement = document.getElementById('totalCost');
 
-    // 前処理のコストを取得
-    let preprocessCost = preprocessingPrices[preprocessing] || 0;
+    // 修正した合計コストの計算ロジックを使用
+    let preprocessCost = calculateTotalPreprocessingCost();
 
     // 加工内容の価格を取得
     let serviceCost = prices[product][location][service] || 0;
@@ -207,11 +225,13 @@ function calculateCost() {
     // 合計コストを計算
     const totalPrice = serviceCost + preprocessCost + accessoriesCost + otherFee;
 
-    // 前処理の内訳情報を更新
+    // 前処理と付属品の内訳情報を更新 (前処理の内訳情報の更新をここに移動)
     let preprocessingDetails = '';
-    if (preprocessing !== 'なし') {
-        preprocessingDetails += `<p>前処理: ${preprocessing}: ¥${preprocessingPrices[preprocessing].toLocaleString()}</p>`;
-    }
+    document.querySelectorAll('[name="preprocessing[]"]').forEach(selector => {
+        if (selector.value !== 'なし') {
+            preprocessingDetails += `<p>前処理: ${selector.value}: ¥${preprocessingPrices[selector.value].toLocaleString()}</p>`;
+        }
+    });
 
     // 付属品の内訳情報を更新
     let accessoriesDetails = '';
