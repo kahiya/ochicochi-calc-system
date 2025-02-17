@@ -68,7 +68,7 @@ const accessories = [
     { name: '絽衿裏（正絹）', price: 2750 },
     { name: '衿裏（ポリ）', price: 550 },
     { name: '絽衿裏（ポリ）', price: 1100 },
-    { name: '台衿（衿芯）', price: 660 }
+    { name: '台衿（衿芯）', price: 660 },
   ];
 
 // 各種選択肢をセットアップする関数
